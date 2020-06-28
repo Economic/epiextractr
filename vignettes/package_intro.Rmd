@@ -1,0 +1,44 @@
+---
+title: "Basic usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(tidyverse)
+```
+
+Load all variables in the 2018-2019 EPI CPS ORG extracts:
+```{r more data}
+library(epiextractr)
+cps <- load_cps(years = 2018:2019, sample = "org")
+```
+
+Load a selection of variables from the 2019 EPI CPS ORG extracts:
+```{r setup}
+library(epiextractr)
+cps <- load_cps(years = 2019, 
+                sample = "org", 
+                variables = c("basicwgt", "female", "hispanic"))
+cps
+```
+
+Calculate annual employment-to-population ratios by race/ethnicity using tidyverse and labelled functions:
+```{r detailed}
+# library(tidyverse)
+load_cps(years = 2010:2019,
+         sample = "org",
+         variables = c("year", "basicwgt", "age", "wbho", "emp")) %>%
+  filter(age >= 16) %>%
+  group_by(year, wbho) %>%
+  summarize(epop = weighted.mean(emp, w = basicwgt)) %>%
+  mutate(wbho = str_to_lower(labelled::to_character(wbho))) %>%
+  pivot_wider(year, names_from = wbho, values_from = epop)
+```

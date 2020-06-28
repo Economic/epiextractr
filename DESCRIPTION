@@ -1,0 +1,28 @@
+Package: epiextractr
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Ben",
+             family = "Zipperer",
+             role = c("aut", "cre"),
+             email = "benzipperer@gmail.com"),
+      person(given = "Economic Policy Institute",
+             role = c("cph", "fnd")))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+URL: https://economic.github.io/epiextractr
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    purrr,
+    tibble,
+    labelled,
+    arrow
+RoxygenNote: 7.1.0
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

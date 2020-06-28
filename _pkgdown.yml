@@ -1,0 +1,5 @@
+url: https://economic.github.io/epiextractr
+
+template:
+  params:
+    bootswatch: flatly
