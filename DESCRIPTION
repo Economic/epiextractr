@@ -1,6 +1,6 @@
 Package: epiextractr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Use EPI microdata extracts in R
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Ben",
@@ -9,8 +9,7 @@ Authors@R:
              email = "benzipperer@gmail.com"),
       person(given = "Economic Policy Institute",
              role = c("cph", "fnd")))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Load EPI microdata extract files from microdata.epi.org.
 License: MIT + file LICENSE
 URL: https://economic.github.io/epiextractr
 Encoding: UTF-8
