@@ -26,10 +26,11 @@ load_cps(years = 2019,
          variables = c("basicwgt", "female", "hispanic"))
 ```
 
-Calculate annual employment-to-population ratios by race/ethnicity using tidyverse and labelled functions:
+Calculate annual employment-to-population ratios by race/ethnicity from the 2010-2019 Basic CPS using tidyverse and labelled functions:
 ``` r
+library(tidyverse)
 load_cps(years = 2010:2019,
-         sample = "org",
+         sample = "basic",
          variables = c("year", "basicwgt", "age", "wbho", "emp")) %>%
   filter(age >= 16) %>%
   group_by(year, wbho) %>%
