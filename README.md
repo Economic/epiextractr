@@ -11,11 +11,30 @@ epiextractr makes it easy to use the [EPI microdata extracts](https://microdata.
 devtools::install_github("economic/epiextractr")
 ```
 
-## Example
-This is a basic example which shows you how to solve a common problem:
-
+## Examples
+Load all variables in the 2018-2019 EPI CPS ORG extracts:
 ``` r
 library(epiextractr)
-## basic example code
+load_cps(years = 2018:2019, sample = "org")
+```
+
+Load a selection of variables from the 2019 EPI CPS ORG extracts:
+``` r
+library(epiextractr)
+load_cps(years = 2019, 
+         sample = "org", 
+         variables = c("basicwgt", "female", "hispanic"))
+```
+
+Calculate annual employment-to-population ratios by race/ethnicity using tidyverse and labelled functions:
+``` r
+load_cps(years = 2010:2019,
+         sample = "org",
+         variables = c("year", "basicwgt", "age", "wbho", "emp")) %>%
+  filter(age >= 16) %>%
+  group_by(year, wbho) %>%
+  summarize(epop = weighted.mean(emp, w = basicwgt)) %>%
+  mutate(wbho = str_to_lower(labelled::to_character(wbho))) %>%
+  pivot_wider(year, names_from = wbho, values_from = epop)
 ```
 
