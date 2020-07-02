@@ -21,7 +21,6 @@ load_cps(years = 2018:2019, sample = "org")
 
 Load a selection of variables from the 2019 EPI CPS ORG extracts:
 ``` r
-library(epiextractr)
 load_cps(years = 2019, 
          sample = "org", 
          variables = c("basicwgt", "female", "hispanic"))
@@ -40,19 +39,15 @@ load_cps(years = 2010:2019,
   pivot_wider(year, names_from = wbho, values_from = epop)
 ```
 
-### Loading specific months
-One current deficiency of `load_cps()` is that it pulls data from annual files, so it can't easily to grab data that is only available in monthly files. To get around that, commandeer the `epiextractr:::read_single_year()` function to grab individual months.
+### Load monthly files
+The EPI CPS extracts are available as annual files, except when there is not a full calendar year of data. When only monthly files are available, you can use the months option:
 
-For example, to load January 2018 - May 2020 ORG data, try something like
-
-``` r
-cps <- load_cps(years = 2018:2019, sample = "org", variables = c("year", "month", "orgwgt", "age", "union"))
-cps2020 <- map_df(1:5,
-                  ~ epiextractr:::read_single_year(
-                    paste0(2020, "_", .),
-                    sample = "org",
-                    variables = c("year", "month", "orgwgt", "age", "union"),
-                    extracts_dir = "/data/cps/org/epi"))
-bind_rows(cps, cps2020)
+```r
+cps_2020 <- load_cps(years = 2020, sample = "org", months = 1:5)
 ```
 
+And then you can combine these data with prior years with your favorite binding command, like 
+
+```r
+load_cps(years = 2018:2019, sample = "org") %>% bind_rows(cps_2020)
+```

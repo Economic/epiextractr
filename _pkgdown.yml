@@ -3,3 +3,9 @@ url: https://economic.github.io/epiextractr
 template:
   params:
     bootswatch: flatly
+home:
+  links:
+  - text: Browse source code at
+    href: https://github.com/Economic/epiextractr
+  - text: Underlying EPI microdata extracts
+    href: https://microdata.epi.org

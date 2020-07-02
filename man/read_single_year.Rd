@@ -4,12 +4,14 @@
 \alias{read_single_year}
 \title{Read single year of feather CPS}
 \usage{
-read_single_year(year, sample, variables = NULL, extracts_dir)
+read_single_year(year, sample, month = NULL, variables = NULL, extracts_dir)
 }
 \arguments{
 \item{year}{year of data}
 
 \item{sample}{CPS sample ("basic", "may", "org")}
+
+\item{month}{month of file}
 
 \item{variables}{variables to keep}
 

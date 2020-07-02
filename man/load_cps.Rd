@@ -7,6 +7,7 @@
 load_cps(
   years,
   sample,
+  months = NULL,
   variables = NULL,
   extracts_dir = NULL,
   val_labels = TRUE
@@ -16,6 +17,8 @@ load_cps(
 \item{years}{years of CPS data (integers)}
 
 \item{sample}{CPS sample ("org", "basic", "may")}
+
+\item{months}{months of data to load, only for monthly files}
 
 \item{variables}{variables to keep}
 

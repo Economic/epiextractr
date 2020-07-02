@@ -4,6 +4,7 @@
 #'
 #' @param years years of CPS data (integers)
 #' @param sample CPS sample ("org", "basic", "may")
+#' @param months months of data to load, only for monthly files
 #' @param variables variables to keep
 #' @param extracts_dir directory where EPI extracts are
 #' @param val_labels when TRUE, add value labels to variables
@@ -15,27 +16,37 @@
 #' @examples load_cps(years = 2018:2019, sample = "org")
 load_cps <- function(years,
                      sample,
+                     months = NULL,
                      variables = NULL,
                      extracts_dir = NULL,
                      val_labels = TRUE) {
 
+  # check extracts_dir
   if (is.null(extracts_dir)) {
     extracts_dir <- file.path("/data/cps", sample, "epi")
   }
 
-  the_data <-
-    purrr::map_dfr(years, ~ read_single_year(
-      .x,
+  # read the data into single frame
+  if (is.null(months)) {
+    the_data <- purrr::map_dfr(years, ~ read_single_year(
+      year = .x,
       sample = sample,
+      month = months,
       variables = variables,
-      extracts_dir = extracts_dir
-      )
-    )
-
-  if (!val_labels) {
-    the_data
+      extracts_dir = extracts_dir))
   }
   else {
+    the_data <- purrr::map2_dfr(years, months, ~ read_single_year(
+      year = .x,
+      sample = sample,
+      month = .y,
+      variables = variables,
+      extracts_dir = extracts_dir))
+  }
+
+
+  # add value labels if necessary
+  if (val_labels) {
     label_filename <- paste0("epi_cps", sample, "_labels.rds")
     the_labels <- readRDS(file.path(extracts_dir, label_filename))
 
@@ -62,12 +73,20 @@ load_cps <- function(years,
 #'
 #' @param year year of data
 #' @param sample CPS sample ("basic", "may", "org")
+#' @param month month of file
 #' @param variables variables to keep
 #' @param extracts_dir directory where EPI extracts are
 #'
 
-read_single_year <- function(year, sample, variables = NULL, extracts_dir) {
-  feather_filename <- paste0("epi_cps", sample, "_", year, ".feather")
+read_single_year <- function(year, sample, month = NULL, variables = NULL, extracts_dir) {
+
+
+  if(is.null(month)) {
+    feather_filename <- paste0("epi_cps", sample, "_", year, ".feather")
+  }
+  else {
+    feather_filename <- paste0("epi_cps", sample, "_", year, "_", month, ".feather")
+  }
   the_data <- arrow::read_feather(file.path(extracts_dir, feather_filename))
 
   if (!is.null(variables)) {
