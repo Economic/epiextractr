@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">epiextractr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -89,7 +89,6 @@
 </pre></div>
 <p>Load a selection of variables from the 2019 EPI CPS ORG extracts:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://economic.github.io/epiextractr">epiextractr</a></span>)
 <span class="fu"><a href="reference/load_cps.html">load_cps</a></span>(years = <span class="fl">2019</span>, 
          sample = <span class="st">"org"</span>, 
          variables = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"basicwgt"</span>, <span class="st">"female"</span>, <span class="st">"hispanic"</span>))
@@ -107,20 +106,16 @@
   <span class="fu">pivot_wider</span>(<span class="kw">year</span>, names_from = <span class="kw">wbho</span>, values_from = <span class="kw">epop</span>)
 </pre></div>
 </div>
-<div id="loading-specific-months" class="section level3">
+<div id="load-monthly-files" class="section level3">
 <h3 class="hasAnchor">
-<a href="#loading-specific-months" class="anchor"></a>Loading specific months</h3>
-<p>One current deficiency of <code><a href="reference/load_cps.html">load_cps()</a></code> is that it pulls data from annual files, so it can’t easily to grab data that is only available in monthly files. To get around that, commandeer the <code>epiextractr:::read_single_year()</code> function to grab individual months.</p>
-<p>For example, to load January 2018 - May 2020 ORG data, try something like</p>
+<a href="#load-monthly-files" class="anchor"></a>Load monthly files</h3>
+<p>The EPI CPS extracts are available as annual files, except when there is not a full calendar year of data. When only monthly files are available, you can use the months option:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">cps</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_cps.html">load_cps</a></span>(years = <span class="fl">2018</span><span class="op">:</span><span class="fl">2019</span>, sample = <span class="st">"org"</span>, variables = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"orgwgt"</span>, <span class="st">"age"</span>, <span class="st">"union"</span>))
-<span class="kw">cps2020</span> <span class="op">&lt;-</span> <span class="fu">map_df</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-                  <span class="op">~</span> <span class="kw">epiextractr</span>:::<span class="fu"><a href="reference/read_single_year.html">read_single_year</a></span>(
-                    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="fl">2020</span>, <span class="st">"_"</span>, <span class="kw">.</span>),
-                    sample = <span class="st">"org"</span>,
-                    variables = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"orgwgt"</span>, <span class="st">"age"</span>, <span class="st">"union"</span>),
-                    extracts_dir = <span class="st">"/data/cps/org/epi"</span>))
-<span class="fu">bind_rows</span>(<span class="kw">cps</span>, <span class="kw">cps2020</span>)
+<span class="kw">cps_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_cps.html">load_cps</a></span>(years = <span class="fl">2020</span>, sample = <span class="st">"org"</span>, months = <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>)
+</pre></div>
+<p>And then you can combine these data with prior years with your favorite binding command, like</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="reference/load_cps.html">load_cps</a></span>(years = <span class="fl">2018</span><span class="op">:</span><span class="fl">2019</span>, sample = <span class="st">"org"</span>) <span class="op">%&gt;%</span> <span class="fu">bind_rows</span>(<span class="kw">cps_2020</span>)
 </pre></div>
 </div>
 </div>
@@ -128,7 +123,16 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at at <br><a href="https://github.com/Economic/epiextractr">https://​github.com/​Economic/​epiextractr</a>
+</li>
+<li>Underlying EPI microdata extracts at <br><a href="https://microdata.epi.org">https://​microdata.epi.org</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

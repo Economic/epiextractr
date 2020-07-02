@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">epiextractr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -118,6 +118,7 @@
     <pre class="usage"><span class='fu'><a href='https://economic.github.io/epiextractr/reference/load_cps.html'>load_cps</a></span>(
   <span class='kw'>years</span>,
   <span class='kw'>sample</span>,
+  months = <span class='kw'>NULL</span>,
   variables = <span class='kw'>NULL</span>,
   extracts_dir = <span class='kw'>NULL</span>,
   val_labels = <span class='fl'>TRUE</span>
@@ -133,6 +134,10 @@
     <tr>
       <th>sample</th>
       <td><p>CPS sample ("org", "basic", "may")</p></td>
+    </tr>
+    <tr>
+      <th>months</th>
+      <td><p>months of data to load, only for monthly files</p></td>
     </tr>
     <tr>
       <th>variables</th>
