@@ -30,7 +30,7 @@ install.packages("drat")
 
 Then add the EPI drat repo and install the package
 ```r
-drat::addRepo("Economic")
+drat:::add("Economic")
 install.packages("epiextractr")
 ```
 
