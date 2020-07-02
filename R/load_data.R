@@ -11,6 +11,7 @@
 #' @return a tibble of CPS microdata
 #' @export
 #' @import dplyr
+#' @importFrom stats setNames
 #' @examples load_cps(years = 2018:2019, sample = "org")
 load_cps <- function(years,
                      sample,
@@ -39,10 +40,10 @@ load_cps <- function(years,
     the_labels <- readRDS(file.path(extracts_dir, label_filename))
 
     the_labels_subset <- the_labels %>%
-      mutate(n = purrr::pmap_dbl(list(value_label), nrow)) %>%
+      mutate(n = purrr::pmap_dbl(list(.data$value_label), nrow)) %>%
       filter(n != 0)
 
-    colnames_subset <- pull(the_labels_subset, variable_name)
+    colnames_subset <- pull(the_labels_subset, .data$variable_name)
 
     the_val_labels <- the_labels_subset$value_label %>%
       purrr::map(tibble::deframe) %>%
@@ -51,7 +52,7 @@ load_cps <- function(years,
     the_val_labels
 
     the_data %>%
-      mutate(across(where(is.logical), as.numeric)) %>%
+      mutate_if(is.logical, as.numeric) %>%
       labelled::set_value_labels(.labels = the_val_labels)
   }
 }
@@ -64,6 +65,7 @@ load_cps <- function(years,
 #' @param variables variables to keep
 #' @param extracts_dir directory where EPI extracts are
 #'
+
 read_single_year <- function(year, sample, variables = NULL, extracts_dir) {
   feather_filename <- paste0("epi_cps", sample, "_", year, ".feather")
   the_data <- arrow::read_feather(file.path(extracts_dir, feather_filename))
