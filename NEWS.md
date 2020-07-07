@@ -1,3 +1,7 @@
+# epiextractr 0.3.0
+
+* Added crosstab utility
+
 # epiextractr 0.2.0
 
 * Added ability to extract monthly files

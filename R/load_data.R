@@ -11,8 +11,9 @@
 #'
 #' @return a tibble of CPS microdata
 #' @export
-#' @import dplyr
+#' @importFrom dplyr mutate mutate_if filter pull select
 #' @importFrom stats setNames
+#' @importFrom rlang .data
 #' @examples load_cps(years = 2018:2019, sample = "org")
 load_cps <- function(years,
                      sample,
@@ -52,7 +53,7 @@ load_cps <- function(years,
 
     the_labels_subset <- the_labels %>%
       mutate(n = purrr::pmap_dbl(list(.data$value_label), nrow)) %>%
-      filter(n != 0)
+      filter(.data$n != 0)
 
     colnames_subset <- pull(the_labels_subset, .data$variable_name)
 
@@ -90,7 +91,7 @@ read_single_year <- function(year, sample, month = NULL, variables = NULL, extra
   the_data <- arrow::read_feather(file.path(extracts_dir, feather_filename))
 
   if (!is.null(variables)) {
-    the_data <- dplyr::select(the_data, variables)
+    the_data <- select(the_data, variables)
   }
 
   the_data

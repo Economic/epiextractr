@@ -36,7 +36,6 @@ install.packages("epiextractr")
 
 Alternatively if you want to update the package manually you can install the current version from GitHub via devtools 
 ``` r
-# 
 devtools::install_github("economic/epiextractr")
 ```
 
