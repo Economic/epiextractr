@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read single year of feather CPS — read_single_year • epiextractr</title>
+<title>crosstab: cross-tabulations — crosstab • epiextractr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Read single year of feather CPS — read_single_year" />
-<meta property="og:description" content="Read single year of feather CPS" />
+<meta property="og:title" content="crosstab: cross-tabulations — crosstab" />
+<meta property="og:description" content="crosstab: cross-tabulations" />
 
 
 
@@ -106,43 +106,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read single year of feather CPS</h1>
+    <h1>crosstab: cross-tabulations</h1>
     
-    <div class="hidden name"><code>read_single_year.Rd</code></div>
+    <div class="hidden name"><code>crosstab.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Read single year of feather CPS</p>
+    <p>crosstab: cross-tabulations</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://economic.github.io/epiextractr/reference/read_single_year.html'>read_single_year</a></span>(<span class='kw'>year</span>, <span class='kw'>sample</span>, month = <span class='kw'>NULL</span>, variables = <span class='kw'>NULL</span>, <span class='kw'>extracts_dir</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://economic.github.io/epiextractr/reference/crosstab.html'>crosstab</a></span>(<span class='kw'>df</span>, <span class='kw'>x</span>, y = <span class='kw'>NULL</span>, w = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>year</th>
-      <td><p>year of data</p></td>
+      <th>df</th>
+      <td><p>a data frame</p></td>
     </tr>
     <tr>
-      <th>sample</th>
-      <td><p>CPS sample ("basic", "may", "org")</p></td>
+      <th>x</th>
+      <td><p>first variable</p></td>
     </tr>
     <tr>
-      <th>month</th>
-      <td><p>month of file</p></td>
+      <th>y</th>
+      <td><p>second variable</p></td>
     </tr>
     <tr>
-      <th>variables</th>
-      <td><p>variables to keep</p></td>
-    </tr>
-    <tr>
-      <th>extracts_dir</th>
-      <td><p>directory where EPI extracts are</p></td>
+      <th>w</th>
+      <td><p>weight</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>a tibble</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://economic.github.io/epiextractr/reference/crosstab.html'>crosstab</a></span>(<span class='kw'>mtcars</span>, <span class='kw'>cyl</span>, <span class='kw'>gear</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 4</span><span>
+#&gt;     cyl   `3`   `4`   `5`
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     4     1     8     2
+#&gt; </span><span style='color: #555555;'>2</span><span>     6     2     4     1
+#&gt; </span><span style='color: #555555;'>3</span><span>     8    12    </span><span style='color: #BB0000;'>NA</span><span>     2</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
