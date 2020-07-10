@@ -18,14 +18,17 @@ crosstab <- function(df, x, y = NULL, w = NULL) {
   if (rlang::quo_is_null(arg_y)) {
     df <- df %>%
       dplyr::count({{ x }}, wt = {{ w }}) %>%
-      dplyr::mutate()
+      dplyr::mutate() %>%
+      dplyr::mutate(freq = n/sum(n), cumul = cumsum(freq))
   }
   # two-way tabulation
   else {
     df <- df %>%
-      dplyr::count({{ x }}, {{ y }}) %>%
+      dplyr::count({{ x }}, {{ y }}, wt = {{ w }}) %>%
       dplyr::mutate("{{ y }}" := labelled::to_character({{ y }})) %>%
-      tidyr::pivot_wider({{ x }}, names_from = {{ y }}, values_from = "n")
+      dplyr::group_by({{ x }}) %>%
+      dplyr::mutate(freq = n/sum(n), cumul = cumsum(freq))
+
   }
 
   return(df)
