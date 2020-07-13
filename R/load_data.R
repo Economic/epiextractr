@@ -3,7 +3,7 @@
 #' More description
 #'
 #' @param years years of CPS data (integers)
-#' @param sample CPS sample ("org", "basic", "may")
+#' @param sample CPS sample ("org", "basic", "march", "may")
 #' @param months months of data to load, only for monthly files
 #' @param variables variables to keep
 #' @param extracts_dir directory where EPI extracts are
@@ -22,9 +22,17 @@ load_cps <- function(years,
                      extracts_dir = NULL,
                      val_labels = TRUE) {
 
+  # check sample
+  sample <- tolower(sample)
+  if (! sample %in% c("basic", "march", "may", "org")) {
+    stop("You need to specify the CPS sample: Basic, March, May, ORG")
+  }
+
   # check extracts_dir
   if (is.null(extracts_dir)) {
-    extracts_dir <- file.path("/data/cps", sample, "epi")
+    # use environment variable dir if available
+    extracts_dir <- Sys.getenv(paste0("EPIEXTRACTS_CPS", toupper(sample), "_DIR"))
+    if (extracts_dir == "") extracts_dir <- getwd()
   }
 
   # read the data into single frame
@@ -80,7 +88,6 @@ load_cps <- function(years,
 #'
 
 read_single_year <- function(year, sample, month = NULL, variables = NULL, extracts_dir) {
-
 
   if(is.null(month)) {
     feather_filename <- paste0("epi_cps", sample, "_", year, ".feather")
