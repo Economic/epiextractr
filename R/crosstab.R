@@ -39,7 +39,6 @@ crosstab <- function(df, x, y = NULL, w = NULL, col = FALSE, row = FALSE) {
     if (rlang::quo_is_null(arg_y)) {
       df <- df %>%
         dplyr::count({{ x }}, wt = {{ w }}) %>%
-        dplyr::mutate() %>%
         dplyr::mutate(freq = n/sum(n), cumul = cumsum(freq))
     }
     # two-way tabulation
@@ -61,7 +60,6 @@ crosstab <- function(df, x, y = NULL, w = NULL, col = FALSE, row = FALSE) {
     if (rlang::quo_is_null(arg_y)) {
       df <- df %>%
         dplyr::count({{ x }}, wt = {{ w }}) %>%
-        dplyr::mutate() %>%
         dplyr::mutate(freq = n/sum(n), cumul = cumsum(freq))
     }
     # two-way tabulation
