@@ -4,16 +4,18 @@
 \alias{crosstab}
 \title{crosstab: cross-tabulations}
 \usage{
-crosstab(df, x, y = NULL, w = NULL)
+crosstab(data, ..., w = NULL, col = FALSE, row = FALSE)
 }
 \arguments{
-\item{df}{a data frame}
+\item{data}{a data frame}
 
-\item{x}{first variable}
-
-\item{y}{second variable}
+\item{...}{one or two variables, for a one- or two-way cross-tabulation}
 
 \item{w}{weight}
+
+\item{col}{column percentages in a two-way cross-tabulation}
+
+\item{row}{row percentages in a two-way cross-tabulation}
 }
 \value{
 a tibble
@@ -22,5 +24,7 @@ a tibble
 crosstab: cross-tabulations
 }
 \examples{
+crosstab(mtcars, cyl)
 crosstab(mtcars, cyl, gear)
+crosstab(mtcars, cyl, gear, w = mpg, col = TRUE)
 }

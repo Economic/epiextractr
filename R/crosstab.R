@@ -1,33 +1,75 @@
 #' crosstab: cross-tabulations
 #'
-#' @param df a data frame
-#' @param x first variable
-#' @param y second variable
+#' @param data a data frame
+#' @param ... one or two variables, for a one- or two-way cross-tabulation
 #' @param w weight
+#' @param col column percentages in a two-way cross-tabulation
+#' @param row row percentages in a two-way cross-tabulation
 #' @return a tibble
 #' @export
 #' @importFrom magrittr %>%
-#' @importFrom rlang :=
+
+#' @examples crosstab(mtcars, cyl)
 #' @examples crosstab(mtcars, cyl, gear)
-crosstab <- function(df, x, y = NULL, w = NULL) {
+#' @examples crosstab(mtcars, cyl, gear, w = mpg, col = TRUE)
+crosstab <- function(data, ... , w = NULL, col = FALSE, row = FALSE) {
 
-  # need to add row and column percentages
-  arg_y <- rlang::enquo(y)
+  # parse col names
+  col_names <- rlang::enquos(...)
 
-  # one-way tabulation
-  if (rlang::quo_is_null(arg_y)) {
-    df <- df %>%
-      dplyr::count({{ x }}, wt = {{ w }}) %>%
-      dplyr::mutate()
-  }
-  # two-way tabulation
-  else {
-    df <- df %>%
-      dplyr::count({{ x }}, {{ y }}) %>%
-      dplyr::mutate("{{ y }}" := labelled::to_character({{ y }})) %>%
-      tidyr::pivot_wider({{ x }}, names_from = {{ y }}, values_from = "n")
+  # syntax checks
+  if (length(col_names) > 2) {
+    stop("Only one-way or two-way crosstabs allowed")
   }
 
-  return(df)
+  # ungroup data
+  data <- dplyr::ungroup(data)
+
+  # prep for all crosstabs
+  out <- dplyr::count(data, ..., wt = {{ w }})
+
+  # One-way crosstab
+  if (length(col_names) == 1) {
+    if (col | row) {
+      warning("Column and row percentage options are ignored in a one-way cross-tabulation")
+    }
+
+    out <- out %>%
+      mutate(percent = .data$n/sum(.data$n), cumul_percent = cumsum(.data$percent)) %>%
+      dplyr::as_tibble()
+  }
+
+  # Two-way crosstab
+  if (length(col_names) == 2) {
+
+    # col & row percentages
+    if (col & row) {
+      stop("You cannot select both col and row percentage options; select either or neither, but not both.")
+    }
+
+    # col percentages
+    if (col & !row) {
+      out <- out %>%
+        dplyr::group_by(!! col_names[[2]]) %>%
+        dplyr::mutate(n = .data$n / sum(.data$n)) %>%
+        dplyr::ungroup()
+    }
+
+    # row percentages
+    if (!col & row) {
+      out <- out %>%
+        dplyr::group_by(!! col_names[[1]]) %>%
+        dplyr::mutate(n = .data$n / sum(.data$n)) %>%
+        dplyr::ungroup()
+    }
+
+    out <- out %>%
+      dplyr::mutate(dplyr::across(!! col_names[[2]], labelled::to_character)) %>%
+      tidyr::pivot_wider(id_cols = !! col_names[[1]], names_from = !! col_names[[2]], values_from = "n")
+  }
+
+  out
 
 }
+
+

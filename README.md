@@ -22,23 +22,10 @@ load_cps(years = 2019,
 ## Installation and usage
 
 ### 1. Install the package
-The best way to install the package is using drat. drat allows you to update non-CRAN packages via `update.packages()`. If you don't have drat already, first
-
-```r
-install.packages("drat")
-```
-
-Then add the EPI drat repo and install the package
-```r
-drat:::add("Economic")
-install.packages("epiextractr")
-```
-
-Alternatively if you want to update the package manually you can install the current version from GitHub via devtools 
+Install the current version from GitHub via devtools 
 ``` r
 devtools::install_github("economic/epiextractr")
 ```
-
 ### 2. Download the microdata
 Use `download_cps()` or just download the data from https://microdata.epi.org.
 
