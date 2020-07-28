@@ -7,6 +7,10 @@ Authors@R:
              family = "Zipperer",
              role = c("aut", "cre"),
              email = "benzipperer@gmail.com"),
+      person(given = "Jori",
+             family = "Kandra",
+             role = "aut",
+             email = "jkandra@epi.org"),
       person(given = "Economic Policy Institute",
              role = c("cph", "fnd")))
 Description: Tools used by the Economic Policy Institute, including the 

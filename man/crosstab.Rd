@@ -4,7 +4,7 @@
 \alias{crosstab}
 \title{crosstab: cross-tabulations}
 \usage{
-crosstab(data, ..., w = NULL, col = FALSE, row = FALSE, tidy = FALSE)
+crosstab(data, ..., w = NULL, col = FALSE, row = FALSE)
 }
 \arguments{
 \item{data}{a data frame}
@@ -16,8 +16,6 @@ crosstab(data, ..., w = NULL, col = FALSE, row = FALSE, tidy = FALSE)
 \item{col}{column percentages in a two-way cross-tabulation}
 
 \item{row}{row percentages in a two-way cross-tabulation}
-
-\item{tidy}{if TRUE, output is tidy/long}
 }
 \value{
 a tibble

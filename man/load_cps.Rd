@@ -16,7 +16,7 @@ load_cps(
 \arguments{
 \item{years}{years of CPS data (integers)}
 
-\item{sample}{CPS sample ("org", "basic", "may")}
+\item{sample}{CPS sample ("org", "basic", "march", "may")}
 
 \item{months}{months of data to load, only for monthly files}
 

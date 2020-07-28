@@ -1,6 +1,7 @@
 # epiextractr 0.4.0
 
 * Added percentages to one- and two-way cross tabulations
+* Use environment variables for default data locations
 
 # epiextractr 0.3.0
 
