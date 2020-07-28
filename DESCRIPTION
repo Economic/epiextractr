@@ -1,7 +1,7 @@
 Package: epiextractr
 Type: Package
 Title: Economic Policy Institute data tools
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: 
     c(person(given = "Ben",
              family = "Zipperer",
@@ -23,6 +23,7 @@ Imports:
     arrow,
     magrittr,
     rlang,
+    tidyselect,
     tidyr
 RoxygenNote: 7.1.1
 Suggests: 
