@@ -44,17 +44,16 @@ download_cps <- function(sample,
   download_path <- file.path("https://microdata.epi.org", compressed_file)
 
   # download & extract the data
-  utils::txtProgressBar()
   temp_dest <- tempfile()
   download.file(download_path, temp_dest)
-  untar(temp_dest, exdir = extracts_dir)
-  pb <- progress::progress_bar$new(
-    format = " decompressing at [:bar], :percent in :elapsed",
-    total = 100, clear = FALSE, total - NA, width = 60)
-  for(i in 1:100) {
-    pb$tick()
-    Sys.sleep(1 / 100)
+
+  f <- function() {
+    message("Please wait, file decompressing")
+    untar(temp_dest, exdir = extracts_dir)
   }
+
+  f()
+
   unlink(temp_dest)
 }
 
