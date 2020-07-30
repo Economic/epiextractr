@@ -46,7 +46,11 @@ download_cps <- function(sample,
   # download & extract the data
   temp_dest <- tempfile()
   download.file(download_path, temp_dest)
+
+
+  message("Decompressing files...")
   untar(temp_dest, exdir = extracts_dir)
+
   unlink(temp_dest)
 }
 
