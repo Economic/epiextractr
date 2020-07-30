@@ -47,12 +47,9 @@ download_cps <- function(sample,
   temp_dest <- tempfile()
   download.file(download_path, temp_dest)
 
-  f <- function() {
-    message("Please wait, file decompressing")
-    untar(temp_dest, exdir = extracts_dir)
-  }
 
-  f()
+  message("Decompressing files...")
+  untar(temp_dest, exdir = extracts_dir)
 
   unlink(temp_dest)
 }
