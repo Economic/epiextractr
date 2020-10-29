@@ -8,7 +8,7 @@
 #' @return a tibble
 #' @export
 #' @importFrom magrittr %>%
-
+#' @importFrom rlang .data
 #' @examples crosstab(mtcars, cyl)
 #' @examples crosstab(mtcars, cyl, gear)
 #' @examples crosstab(mtcars, cyl, gear, w = mpg, col = TRUE)
@@ -35,7 +35,9 @@ crosstab <- function(data, ... , w = NULL, col = FALSE, row = FALSE) {
     }
 
     out <- out %>%
-      mutate(percent = .data$n/sum(.data$n), cumul_percent = cumsum(.data$percent)) %>%
+      dplyr::mutate(
+        percent = .data$n/sum(.data$n),
+        cumul_percent = cumsum(.data$percent)) %>%
       dplyr::as_tibble()
   }
 
@@ -64,7 +66,7 @@ crosstab <- function(data, ... , w = NULL, col = FALSE, row = FALSE) {
     }
 
     out <- out %>%
-      dplyr::mutate(dplyr::across(!! col_names[[2]], labelled::to_character)) %>%
+      dplyr::mutate(dplyr::across(!! col_names[[2]], ~ as.character(haven::as_factor(.x)))) %>%
       tidyr::pivot_wider(id_cols = !! col_names[[1]], names_from = !! col_names[[2]], values_from = "n")
   }
 

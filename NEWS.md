@@ -1,3 +1,7 @@
+# epiextractr 0.5.0
+
+* Updated to use arrow 2.0.
+
 # epiextractr 0.4.0
 
 * Added percentages to one- and two-way cross tabulations

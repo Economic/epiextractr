@@ -33,5 +33,7 @@ a tibble of CPS microdata
 More description
 }
 \examples{
+\dontrun{
 load_cps(years = 2018:2019, sample = "org")
+}
 }
