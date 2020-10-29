@@ -37,10 +37,10 @@ download_cps <- function(sample,
   }
 
   # define compressed file names
-  if (sample == "basic") compressed_file <- "epi_cpsbasic_1976_1999.tar.gz"
-  if (sample == "march") compressed_file <- "epi_cpsmarch_1962_2018.tar.gz"
-  if (sample == "may") compressed_file <- "epi_cpsmay_1973_1981.tar.gz"
-  if (sample == "org") compressed_file <- "epi_cpsorg_1979_2020.tar.gz"
+  if (sample == "basic") compressed_file <- "epi_cpsbasic.tar.gz"
+  if (sample == "march") compressed_file <- "epi_cpsmarch.tar.gz"
+  if (sample == "may") compressed_file <- "epi_cpsmay.tar.gz"
+  if (sample == "org") compressed_file <- "epi_cpsorg.tar.gz"
   download_path <- file.path("https://microdata.epi.org", compressed_file)
 
   # download & extract the data
