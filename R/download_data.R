@@ -17,6 +17,10 @@ download_cps <- function(sample,
                          extracts_dir = NULL,
                          overwrite = FALSE) {
 
+  # temporarily change download timeout option
+  op <- options(timeout = max(600, getOption("timeout")))
+  on.exit(options(op))
+
   # require extracts dir
   if (is.null(extracts_dir)) {
     stop("extracts_dir must specify a directory into which to extract the data")
@@ -46,7 +50,6 @@ download_cps <- function(sample,
   # download & extract the data
   temp_dest <- tempfile()
   download.file(download_path, temp_dest)
-
 
   message("Decompressing files...")
   untar(temp_dest, exdir = extracts_dir)
