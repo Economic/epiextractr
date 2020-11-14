@@ -4,11 +4,9 @@
 #'
 #' @param years years of CPS data (integers)
 #' @param sample CPS sample ("org", "basic", "march", "may")
-#' @param months months of data to load, only for monthly files
 #' @param variables variables to keep
 #' @param extracts_dir directory where EPI extracts are
-#' @param val_labels when TRUE, add value labels to variables
-#'
+#' @param version_check when TRUE, confirm data are same version
 #' @return a tibble of CPS microdata
 #' @export
 #' @importFrom magrittr %>%
@@ -18,16 +16,12 @@
 #' }
 load_cps <- function(years,
                      sample,
-                     months = NULL,
                      variables = NULL,
                      extracts_dir = NULL,
-                     val_labels = TRUE) {
+                     version_check = TRUE) {
 
-  # check sample
-  sample <- tolower(sample)
-  if (! sample %in% c("basic", "march", "may", "org")) {
-    stop("You need to specify the CPS sample: Basic, March, May, ORG")
-  }
+  # retrieve valid sample name
+  sample <- valid_sample_name(sample)
 
   # check extracts_dir
   if (is.null(extracts_dir)) {
@@ -37,28 +31,22 @@ load_cps <- function(years,
   }
 
   # read the data into single list
-  if (is.null(months)) {
-    the_data <- purrr::map(
-      years, ~ read_single_year(
-      year = .x,
-      sample = sample,
-      month = months,
-      variables = variables,
-      extracts_dir = extracts_dir))
-  }
-  else {
-    crossargs <- expand.grid(x=years, y=months)
-    the_data <- purrr::map2(crossargs$x, crossargs$y, ~ read_single_year(
-      year = .x,
-      sample = sample,
-      month = .y,
-      variables = variables,
-      extracts_dir = extracts_dir))
-  }
+  the_data <-
+    purrr::map(
+      years,
+      ~ read_single_year(
+        year = .x,
+        sample = sample,
+        variables = variables,
+        extracts_dir = extracts_dir,
+        version_check = version_check)
+    ) %>%
+    # stack the data and add version attributes
+    bind_cps(version_check = version_check)
 
-  the_data %>%
-    data.table::rbindlist(use.names = TRUE) %>%
-    tibble::as_tibble()
+  if (version_check) message(paste("Using", attr(the_data, "label")))
+  the_data
+
 }
 
 
@@ -66,26 +54,69 @@ load_cps <- function(years,
 #'
 #' @param year year of data
 #' @param sample CPS sample ("basic", "may", "org")
-#' @param month month of file
 #' @param variables variables to keep
 #' @param extracts_dir directory where EPI extracts are
 #'
 
-read_single_year <- function(year, sample, month = NULL, variables = NULL, extracts_dir) {
+read_single_year <- function(year,
+                             sample,
+                             variables = NULL,
+                             extracts_dir,
+                             version_check) {
 
-  if(is.null(month)) {
-    feather_filename <- paste0("epi_cps", sample, "_", year, ".feather")
+  feather_filename <- paste0("epi_cps", sample, "_", year, ".feather")
+  full_feather_filename <- file.path(extracts_dir, feather_filename)
+
+  if (file.exists(full_feather_filename)) {
+    return(arrow::read_feather(full_feather_filename, col_select = variables))
   }
   else {
-    feather_filename <- paste0("epi_cps", sample, "_", year, "_", month, ".feather")
+    monthly_prefix <- paste0("epi_cpsorg_", year, "_")
+    months <- dir(extracts_dir, pattern = monthly_prefix) %>%
+      sub(paste0(".*", monthly_prefix), "", .) %>%
+      sub(".feather", "", .) %>%
+      as.numeric() %>%
+      sort()
+    if (length(months) > 0) {
+      monthly_data <- purrr::map(
+        months,
+        ~ file.path(extracts_dir, paste0(monthly_prefix, .x, ".feather")) %>%
+          arrow::read_feather(col_select = variables)
+      )
+      months <- paste(months, collapse = " ")
+      message(paste("Data for year", year, "only includes months", months))
+      return(bind_cps(monthly_data, version_check))
+    }
+    # abort when no data found
+    else {
+      rlang::abort(paste(extracts_dir, "does not contain data for the year", year))
+    }
   }
 
-  if (!is.null(variables)) {
-    the_data <- arrow::read_feather(file.path(extracts_dir, feather_filename), col_select = variables)
-  }
-  else {
-    the_data <- arrow::read_feather(file.path(extracts_dir, feather_filename))
+}
+
+
+#' bind list of cps files together
+#'
+#' @param x list of cps files
+#' @param version_check whether to check verisons
+#'
+bind_cps <- function(x, version_check) {
+
+  versions <- purrr::map(x, ~ attr(.x, "label")) %>% unlist()
+  full_version <- unique(versions)
+  if (! length(full_version) == 1) {
+    message("You are using multiple, different versions of the EPI CPS extracts.")
+    message("This is not recommended.")
+    message("You should re-download the most current version of the data with download_cps().")
+    if (version_check) rlang::abort("Version conflicts among multiple data files.")
   }
 
-  the_data
+  x <- data.table::rbindlist(x, use.names = TRUE) %>%
+    tibble::as_tibble()
+
+  attr(x, "label") <- full_version
+  attr(x, "version") <- sub(".*Version ", "", full_version)
+
+  x
 }
