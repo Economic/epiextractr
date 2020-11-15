@@ -73,7 +73,7 @@ read_single_year <- function(year,
   }
   else {
     monthly_prefix <- paste0("epi_cps", sample, "_", year, "_")
-    months <- dir(extracts_dir, pattern = monthly_prefix)
+    months <- dir(extracts_dir, pattern = paste0("^", monthly_prefix, ".*\\.feather$"))
     months <- sub(paste0(".*", monthly_prefix), "", months)
     months <- sub(".feather", "", months) %>%
       as.numeric() %>%
