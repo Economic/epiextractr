@@ -17,15 +17,21 @@ download_cps <- function(sample,
                          extracts_dir = NULL,
                          overwrite = FALSE) {
 
+  # retrieve valid sample name
+  sample <- valid_sample_name(sample)
+
   # require extracts dir
   if (is.null(extracts_dir)) {
-    stop("extracts_dir must specify a directory into which to extract the data")
+    rlang::abort("extracts_dir must specify a directory into which to extract the data")
+  }
+  if (!file.exists(extracts_dir)) {
+    rlang::abort(paste("Directory", extracts_dir, "does not exist"))
   }
 
   # deal with existing files
   existing_files <- dir(extracts_dir, pattern = paste0("epi_cps", sample))
   if (!overwrite & length(existing_files) != 0) {
-    stop(paste(extracts_dir, "contains existing EPI CPS", sample, "extracts. Please delete them or specify overwrite = TRUE"))
+    rlang::abort(paste(extracts_dir, "contains existing EPI CPS", sample, "extracts. Please delete them or specify overwrite = TRUE"))
   }
   else if (overwrite & length(existing_files) != 0) {
     message(paste("Deleting existing EPI CPS", sample, "extracts in", extracts_dir, "..."))
@@ -37,19 +43,19 @@ download_cps <- function(sample,
   }
 
   # define compressed file names
-  if (sample == "basic") compressed_file <- "epi_cpsbasic.tar.gz"
-  if (sample == "march") compressed_file <- "epi_cpsmarch.tar.gz"
-  if (sample == "may") compressed_file <- "epi_cpsmay.tar.gz"
-  if (sample == "org") compressed_file <- "epi_cpsorg.tar.gz"
-  download_path <- file.path("https://microdata.epi.org", compressed_file)
+  download_path <- file.path("https://microdata.epi.org",
+                             paste0("epi_cps", sample, ".tar.gz"))
+
+  # temporarily change download timeout option
+  op <- options(timeout = max(600, getOption("timeout")))
+  on.exit(options(op))
 
   # download & extract the data
   temp_dest <- tempfile()
   download.file(download_path, temp_dest)
 
-
   message("Decompressing files...")
-  untar(temp_dest, exdir = extracts_dir)
+  untar(temp_dest, exdir = path.expand(extracts_dir))
 
   unlink(temp_dest)
 }

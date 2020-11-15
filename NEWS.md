@@ -1,3 +1,8 @@
+# epiextractr 0.6.0
+
+* improve monthly file extraction
+* add extract version metadata and version checking
+
 # epiextractr 0.5.0
 
 * Updated to use arrow 2.0.
