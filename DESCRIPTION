@@ -1,7 +1,7 @@
 Package: epiextractr
 Type: Package
-Title: Economic Policy Institute data tools
-Version: 0.5.0
+Title: Tools to use Economic Policy Institute Microdata Extracts 
+Version: 0.6.0
 Authors@R: 
     c(person(given = "Ben",
              family = "Zipperer",
@@ -13,22 +13,19 @@ Authors@R:
              email = "jkandra@epi.org"),
       person(given = "Economic Policy Institute",
              role = c("cph", "fnd")))
-Description: Tools used by the Economic Policy Institute, including the 
-    EPI microdata extracts from microdata.epi.org.
+Description: Tools to download and load the EPI microdata extracts from microdata.epi.org.
 License: MIT + file LICENSE
 URL: https://economic.github.io/epiextractr
 Encoding: UTF-8
 LazyData: true
 Imports:
-    dplyr,
     purrr,
     tibble,
     arrow (>= 2.0),
     magrittr,
     rlang,
     data.table,
-    tidyr,
-    haven
+    utils
 RoxygenNote: 7.1.1
 Suggests: 
     knitr,

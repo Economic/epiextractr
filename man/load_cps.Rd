@@ -7,10 +7,9 @@
 load_cps(
   years,
   sample,
-  months = NULL,
   variables = NULL,
   extracts_dir = NULL,
-  val_labels = TRUE
+  version_check = TRUE
 )
 }
 \arguments{
@@ -18,13 +17,11 @@ load_cps(
 
 \item{sample}{CPS sample ("org", "basic", "march", "may")}
 
-\item{months}{months of data to load, only for monthly files}
-
 \item{variables}{variables to keep}
 
 \item{extracts_dir}{directory where EPI extracts are}
 
-\item{val_labels}{when TRUE, add value labels to variables}
+\item{version_check}{when TRUE, confirm data are same version}
 }
 \value{
 a tibble of CPS microdata
