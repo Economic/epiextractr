@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">epiextractr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -118,10 +118,9 @@
     <pre class="usage"><span class='fu'>load_cps</span><span class='op'>(</span>
   <span class='va'>years</span>,
   <span class='va'>sample</span>,
-  months <span class='op'>=</span> <span class='cn'>NULL</span>,
   variables <span class='op'>=</span> <span class='cn'>NULL</span>,
   extracts_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
-  val_labels <span class='op'>=</span> <span class='cn'>TRUE</span>
+  version_check <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -136,10 +135,6 @@
       <td><p>CPS sample ("org", "basic", "march", "may")</p></td>
     </tr>
     <tr>
-      <th>months</th>
-      <td><p>months of data to load, only for monthly files</p></td>
-    </tr>
-    <tr>
       <th>variables</th>
       <td><p>variables to keep</p></td>
     </tr>
@@ -148,8 +143,8 @@
       <td><p>directory where EPI extracts are</p></td>
     </tr>
     <tr>
-      <th>val_labels</th>
-      <td><p>when TRUE, add value labels to variables</p></td>
+      <th>version_check</th>
+      <td><p>when TRUE, confirm data are same version</p></td>
     </tr>
     </table>
 

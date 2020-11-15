@@ -4,7 +4,7 @@
     <loc>https://economic.github.io/epiextractr/index.html</loc>
   </url>
   <url>
-    <loc>https://economic.github.io/epiextractr/reference/crosstab.html</loc>
+    <loc>https://economic.github.io/epiextractr/reference/bind_cps.html</loc>
   </url>
   <url>
     <loc>https://economic.github.io/epiextractr/reference/download_cps.html</loc>
@@ -14,5 +14,8 @@
   </url>
   <url>
     <loc>https://economic.github.io/epiextractr/reference/read_single_year.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/reference/valid_sample_name.html</loc>
   </url>
 </urlset>
