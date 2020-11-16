@@ -2,11 +2,11 @@
 #'
 #' More description
 #'
-#' @param years years of CPS data (integers)
-#' @param sample CPS sample ("org", "basic", "march", "may")
-#' @param variables variables to keep
-#' @param extracts_dir directory where EPI extracts are
-#' @param version_check when TRUE, confirm data are same version
+#' @param .sample CPS sample ("org", "basic", "march", "may")
+#' @param .years years of CPS data (integers)
+#' @param ... tidy selection of variables to keep
+#' @param .extracts_dir directory where EPI extracts are
+#' @param .version_check when TRUE, confirm data are same version
 #' @return a tibble of CPS microdata
 #' @export
 #' @importFrom magrittr %>%
