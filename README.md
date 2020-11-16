@@ -9,50 +9,42 @@ epiextractr makes it easy to use the [EPI microdata extracts](https://microdata.
 Load all variables in the 2018-2019 EPI CPS ORG extracts:
 ``` r
 library(epiextractr)
-load_cps(years = 2018:2019, sample = "org")
+load_cps("org", 2018:2019)
 ```
 
 Load a selection of variables from the 2019 EPI Basic CPS extracts:
 ``` r
-load_cps(years = 2019, 
-         sample = "basic", 
-         variables = c("basicwgt", "female", "hispanic"))
+load_cps("basic", 2019, basicwgt, female, hispanic)
 ```
 
-## Installation and usage
+## Installation and basic usage
 
-### 1. Install the package
-Install the current version from GitHub via devtools 
+First, install the current version of the package from GitHub via devtools 
 ``` r
 devtools::install_github("economic/epiextractr")
 ```
-### 2. Download the microdata
-Use `download_cps()` or just download the data from https://microdata.epi.org.
+Then download the CPS microdata using `download_cps()`. For example,
+``` r
+download_cps("org", "C:\data\cps\")
+```
+will download the latest EPI CPS ORG extracts from https://microdata.epi.org and place them in `C:\data\cps\`.
+After the data is downloaded, load a selection of CPS data for your analysis:
+```r
+load_cps("org", 2000:2019, year, orgwgt, wage, wbho)
+```
 
-### 3. Use the package
-#### Basic analysis
-Calculate annual employment-to-population ratios by race/ethnicity from the 2010-2019 Basic CPS using tidyverse and labelled functions:
+### More examples
+#### Calculating employment rates by year and race
+Calculate annual employment-to-population ratios by race/ethnicity from the 2010-2019 Basic CPS using tidyverse functions:
 ``` r
 library(tidyverse)
-load_cps(years = 2010:2019,
-         sample = "basic",
-         variables = c("year", "basicwgt", "age", "wbho", "emp")) %>%
+load_cps("basic",
+         1989:2019,
+         year, basicwgt, age, wbhao, emp) %>%
   filter(age >= 16) %>%
-  group_by(year, wbho) %>%
-  summarize(epop = weighted.mean(emp, w = basicwgt)) %>%
-  mutate(wbho = str_to_lower(labelled::to_character(wbho))) %>%
-  pivot_wider(year, names_from = wbho, values_from = epop)
+  group_by(year, wbhao) %>%
+  summarize(value = weighted.mean(emp, w = basicwgt)) %>%
+  mutate(wbhao = str_to_lower(as.character(haven::as_factor(wbhao)))) %>%
+  pivot_wider(year, names_from = wbhao)
 ```
 
-#### Load monthly files
-The EPI CPS extracts are available as annual files, except when there is not a full calendar year of data. When only monthly files are available, you can use the months option:
-
-```r
-cps_2020 <- load_cps(years = 2020, sample = "org", months = 1:5)
-```
-
-And then you can combine these data with prior years with your favorite binding command, like 
-
-```r
-load_cps(years = 2018:2019, sample = "org") %>% bind_rows(cps_2020)
-```
