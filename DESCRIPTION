@@ -25,7 +25,9 @@ Imports:
     magrittr,
     rlang,
     data.table,
-    utils
+    utils,
+    tidyselect,
+    haven
 RoxygenNote: 7.1.1
 Suggests: 
     knitr,
