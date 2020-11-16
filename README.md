@@ -41,7 +41,7 @@ library(tidyverse)
 load_cps("basic",
          1989:2019,
          year, basicwgt, age, wbhao, emp) %>%
-  filter(age >= 16) %>%
+  filter(age >= 16 & basicwgt > 0) %>%
   group_by(year, wbhao) %>%
   summarize(value = weighted.mean(emp, w = basicwgt)) %>%
   mutate(wbhao = str_to_lower(as.character(haven::as_factor(wbhao)))) %>%

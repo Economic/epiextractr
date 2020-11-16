@@ -1,3 +1,6 @@
+# epiextractr 0.7.0
+* add support for tidy selection syntax of variables
+
 # epiextractr 0.6.0
 
 * improve monthly file extraction
