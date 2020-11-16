@@ -1,7 +1,7 @@
 Package: epiextractr
 Type: Package
 Title: Tools to use Economic Policy Institute Microdata Extracts 
-Version: 0.6.0
+Version: 0.7.0
 Authors@R: 
     c(person(given = "Ben",
              family = "Zipperer",
