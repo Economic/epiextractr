@@ -10,6 +10,7 @@
 #' @return a tibble of CPS microdata
 #' @export
 #' @importFrom magrittr %>%
+#' @importFrom haven labelled
 #' @examples
 #' \dontrun{
 #' load_cps(years = 2018:2019, sample = "org")
@@ -41,22 +42,12 @@ load_cps <- function(.sample,
         version_check = .version_check)}
     ) %>%
     # stack the data and add version attributes
-    bind_cps(version_check = version_check)
+    bind_cps(version_check = .version_check)
 
   if (.version_check) message(paste("Using", attr(the_data, "label")))
   the_data
 
 }
-
-
-#' Read single year of feather CPS
-#'
-#' @param year year of data
-#' @param sample CPS sample ("basic", "may", "org")
-#' @param variables variables to keep
-#' @param extracts_dir directory where EPI extracts are
-#' @param version_check when TRUE, confirm separate monthly files have same version
-#'
 
 read_single_year <- function(sample,
                              year,
@@ -68,7 +59,7 @@ read_single_year <- function(sample,
   full_feather_filename <- file.path(extracts_dir, feather_filename)
 
   if (file.exists(full_feather_filename)) {
-    return(read_feather_tidyselect(full_feather_filename, ...))
+    return(arrow::read_feather(full_feather_filename, col_select = c(...)))
   }
   else {
     monthly_prefix <- paste0("epi_cps", sample, "_", year, "_")
@@ -81,7 +72,7 @@ read_single_year <- function(sample,
     if (length(months) > 0) {
       monthly_data <- lapply(months, function(x) {
         file.path(extracts_dir, paste0(monthly_prefix, x, ".feather")) %>%
-          read_feather_tidyselect(...)}
+          arrow::read_feather(col_select = c(...))}
       )
       months <- paste(months, collapse = " ")
       message(paste("Data for year", year, "only includes months", months))
@@ -95,12 +86,6 @@ read_single_year <- function(sample,
 
 }
 
-
-#' bind list of cps files together
-#'
-#' @param x list of cps files
-#' @param version_check whether to check verisons
-#'
 bind_cps <- function(x, version_check) {
 
   versions <- purrr::map(x, ~ attr(.x, "label")) %>% unlist()
@@ -122,19 +107,3 @@ bind_cps <- function(x, version_check) {
 }
 
 
-read_feather_tidyselect <- function(.data, ...) {
-  if (!inherits(.data, "RandomAccessFile")) {
-    .data <- arrow:::make_readable_file(.data)
-    on.exit(.data$close())
-  }
-  reader <- arrow::FeatherReader$create(.data)
-
-  col_select <- rlang::enquos(...)
-  columns <- if (length(col_select) != 0) {
-    tidyselect::vars_select(names(reader), !!!col_select)
-  }
-
-  out <- reader$Read(columns) %>% as.data.frame()
-
-  out
-}

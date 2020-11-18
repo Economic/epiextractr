@@ -2,6 +2,7 @@
 
 export(download_cps)
 export(load_cps)
+importFrom(haven,labelled)
 importFrom(magrittr,"%>%")
 importFrom(utils,download.file)
 importFrom(utils,untar)

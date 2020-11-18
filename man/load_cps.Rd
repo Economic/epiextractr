@@ -4,24 +4,18 @@
 \alias{load_cps}
 \title{Load CPS data}
 \usage{
-load_cps(
-  years,
-  sample,
-  variables = NULL,
-  extracts_dir = NULL,
-  version_check = TRUE
-)
+load_cps(.sample, .years, ..., .extracts_dir = NULL, .version_check = TRUE)
 }
 \arguments{
-\item{years}{years of CPS data (integers)}
+\item{.sample}{CPS sample ("org", "basic", "march", "may")}
 
-\item{sample}{CPS sample ("org", "basic", "march", "may")}
+\item{.years}{years of CPS data (integers)}
 
-\item{variables}{variables to keep}
+\item{...}{tidy selection of variables to keep}
 
-\item{extracts_dir}{directory where EPI extracts are}
+\item{.extracts_dir}{directory where EPI extracts are}
 
-\item{version_check}{when TRUE, confirm data are same version}
+\item{.version_check}{when TRUE, confirm data are same version}
 }
 \value{
 a tibble of CPS microdata
