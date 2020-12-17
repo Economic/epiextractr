@@ -1,19 +1,30 @@
-#' Load CPS data
+#' Load a selection of EPI CPS extracts
 #'
-#' More description
+#' Select years and variables from the EPI CPS microdata extracts. These data
+#' must first be downloaded using `download_cps()` or from
+#' \url{https://microdata.epi.org}.
+#'
+#' Load CPS Details paragraph
+#'
+#' @section After function section:
+#' Despite its location, this actually comes after the function section.
+#' @describeIn load_cps base function group
 #'
 #' @param .sample CPS sample ("org", "basic", "march", "may")
 #' @param .years years of CPS data (integers)
 #' @param ... tidy selection of variables to keep
 #' @param .extracts_dir directory where EPI extracts are
 #' @param .version_check when TRUE, confirm data are same version
-#' @return a tibble of CPS microdata
+#' @return A tibble of CPS microdata
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom haven labelled
 #' @examples
 #' \dontrun{
-#' load_cps(years = 2018:2019, sample = "org")
+#'
+#' # These are equivalent:
+#' load_org(2019:2020)
+#' load_cps("org", 2019:2020)
 #' }
 load_cps <- function(.sample,
                      .years,
@@ -48,6 +59,60 @@ load_cps <- function(.sample,
   the_data
 
 }
+
+#' @export
+#' @describeIn load_cps Load CPS Basic Monthly files
+load_basic <- function(.years,
+                     ...,
+                     .extracts_dir = NULL,
+                     .version_check = TRUE) {
+  load_cps(.sample = "basic",
+           .years = .years,
+           ...,
+           .extracts_dir = .extracts_dir,
+           .version_check = .version_check)
+}
+
+#' @export
+#' @describeIn load_cps Load CPS May files
+load_may <- function(.years,
+                     ...,
+                     .extracts_dir = NULL,
+                     .version_check = TRUE) {
+  load_cps(.sample = "may",
+           .years = .years,
+           ...,
+           .extracts_dir = .extracts_dir,
+           .version_check = .version_check)
+}
+
+#' @export
+#' @describeIn load_cps Load CPS ORG files
+load_org <- function(.years,
+                     ...,
+                     .extracts_dir = NULL,
+                     .version_check = TRUE) {
+  load_cps(.sample = "org",
+           .years = .years,
+           ...,
+           .extracts_dir = .extracts_dir,
+           .version_check = .version_check)
+}
+
+
+# load_cps Load CPS March files
+load_march <- function(.years,
+                     ...,
+                     .extracts_dir = NULL,
+                     .version_check = TRUE) {
+  load_cps(.sample = "march",
+           .years = .years,
+           ...,
+           .extracts_dir = .extracts_dir,
+           .version_check = .version_check)
+}
+
+
 
 read_single_year <- function(sample,
                              year,

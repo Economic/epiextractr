@@ -1,7 +1,4 @@
-#' check sample name validity
-#'
-#' @param x sample name
-#' @return valid, lowercase sample name
+# check sample name validity
 valid_sample_name <- function(x) {
 
   # check sample
@@ -12,4 +9,14 @@ valid_sample_name <- function(x) {
   x
 }
 
-
+# check this is an EPI CPS extract from label info
+assert_valid_extract <- function(x) {
+  if (length(grep("^EPI CPS ", attributes(x)$label)) == 1) {
+    return(invisible)
+  }
+  else {
+    rlang::abort(
+      paste(deparse(substitute(x)), "does not appear to be a valid EPI Extract")
+    )
+  }
+}
