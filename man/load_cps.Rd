@@ -2,35 +2,62 @@
 % Please edit documentation in R/load_data.R
 \name{load_cps}
 \alias{load_cps}
-\title{Load CPS data}
+\alias{load_basic}
+\alias{load_may}
+\alias{load_org}
+\title{Load a selection of EPI CPS extracts}
 \usage{
-load_cps(
-  years,
-  sample,
-  variables = NULL,
-  extracts_dir = NULL,
-  version_check = TRUE
-)
+load_cps(.sample, .years, ..., .extracts_dir = NULL, .version_check = TRUE)
+
+load_basic(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+
+load_may(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+
+load_org(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
 }
 \arguments{
-\item{years}{years of CPS data (integers)}
+\item{.sample}{CPS sample ("org", "basic", "march", "may")}
 
-\item{sample}{CPS sample ("org", "basic", "march", "may")}
+\item{.years}{years of CPS data (integers)}
 
-\item{variables}{variables to keep}
+\item{...}{tidy selection of variables to keep}
 
-\item{extracts_dir}{directory where EPI extracts are}
+\item{.extracts_dir}{directory where EPI extracts are}
 
-\item{version_check}{when TRUE, confirm data are same version}
+\item{.version_check}{when TRUE, confirm data are same version}
 }
 \value{
-a tibble of CPS microdata
+A tibble of CPS microdata
 }
 \description{
-More description
+Select years and variables from the EPI CPS microdata extracts. These data
+must first be downloaded using \code{download_cps()} or from
+\url{https://microdata.epi.org}.
 }
+\details{
+Load CPS Details paragraph
+}
+\section{Functions}{
+\itemize{
+\item \code{load_cps}: base function group
+
+\item \code{load_basic}: Load CPS Basic Monthly files
+
+\item \code{load_may}: Load CPS May files
+
+\item \code{load_org}: Load CPS ORG files
+}}
+
+\section{After function section}{
+
+Despite its location, this actually comes after the function section.
+}
+
 \examples{
 \dontrun{
-load_cps(years = 2018:2019, sample = "org")
+
+# These are equivalent:
+load_org(2019:2020)
+load_cps("org", 2019:2020)
 }
 }

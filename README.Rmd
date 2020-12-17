@@ -1,0 +1,69 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+basic_exists <- file.exists(Sys.getenv("EPIEXTRACTS_CPSBASIC_DIR"))
+org_exists <- file.exists(Sys.getenv("EPIEXTRACTS_CPSORG_DIR"))
+```
+
+# epiextractr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+epiextractr makes it easy to use the [EPI microdata extracts](https://microdata.epi.org/) in R.
+
+## Example
+Load a selection of variables from the 2018-2019 EPI CPS ORG extracts:
+```{r, eval = org_exists}
+library(epiextractr)
+load_org(2018:2019, year, female, wage, orgwgt)
+```
+```{r, echo = FALSE, eval = !org_exists}
+cat("
+# A tibble: 591,270 x 4
+    year orgwgt     female  wage
+   <int>  <dbl>  <int+lbl> <dbl>
+ 1  2018  8544. 0 [Male]    NA  
+ 2  2018  5985. 1 [Female]  NA  
+ 3  2018  7412. 1 [Female]  20.8
+ 4  2018 16209. 1 [Female]  10  
+ 5  2018  6954. 1 [Female]  25  
+ 6  2018 10195. 1 [Female]   9.5
+ 7  2018  8260. 0 [Male]    17  
+ 8  2018  8544. 0 [Male]    NA  
+ 9  2018  5985. 1 [Female]  NA  
+10  2018  4852. 1 [Female]  NA  
+# … with 591,260 more rows
+")
+```
+
+## Installation and basic usage
+
+First, install the current version of the package from GitHub via devtools 
+```{r, eval = FALSE}
+devtools::install_github("economic/epiextractr")
+```
+
+Then download the CPS microdata using `download_cps()`. For example,
+```{r, eval = FALSE}
+download_cps("org", "C:\data\cps")
+```
+will download the latest EPI CPS ORG extracts from https://microdata.epi.org and place them in the directory `C:\data\cps`.
+
+After the data is downloaded, load a selection of CPS data for your analysis:
+```{r, eval = FALSE}
+load_cps("org", 2000:2019, year, orgwgt, wage, wbho, .extracts_dir = "C:\data\cps")
+```
+
+See `vignette("epiextractr")` for more examples.
+

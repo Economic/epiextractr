@@ -1,0 +1,62 @@
+---
+title: "epiextractr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{epiextractr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+basic_exists <- file.exists(Sys.getenv("EPIEXTRACTS_CPSBASIC_DIR"))
+org_exists <- file.exists(Sys.getenv("EPIEXTRACTS_CPSORG_DIR"))
+
+```
+
+```{r setup}
+library(epiextractr)
+```
+
+```{r, eval = basic_exists}
+load_org(2018:2019, year, female, wage, orgwgt)
+```
+```{r, echo = FALSE, eval = !basic_exists}
+cat("
+# A tibble: 591,270 x 4
+    year orgwgt     female  wage
+   <int>  <dbl>  <int+lbl> <dbl>
+ 1  2018  8544. 0 [Male]    NA  
+ 2  2018  5985. 1 [Female]  NA  
+ 3  2018  7412. 1 [Female]  20.8
+ 4  2018 16209. 1 [Female]  10  
+ 5  2018  6954. 1 [Female]  25  
+ 6  2018 10195. 1 [Female]   9.5
+ 7  2018  8260. 0 [Male]    17  
+ 8  2018  8544. 0 [Male]    NA  
+ 9  2018  5985. 1 [Female]  NA  
+10  2018  4852. 1 [Female]  NA  
+# … with 591,260 more rows
+")
+```
+
+
+
+### More examples
+#### Calculating employment rates by year and race
+Calculate annual employment-to-population ratios by race/ethnicity from the 2010-2019 Basic CPS using tidyverse functions:
+```{r, eval = FALSE}
+library(tidyverse)
+load_cps("basic",
+         1989:2019,
+         year, basicwgt, age, wbhao, emp) %>%
+  filter(age >= 16 & basicwgt > 0) %>%
+  group_by(year, wbhao) %>%
+  summarize(value = weighted.mean(emp, w = basicwgt)) %>%
+  mutate(wbhao = str_to_lower(as.character(haven::as_factor(wbhao)))) %>%
+  pivot_wider(year, names_from = wbhao)
+```
