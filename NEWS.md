@@ -1,3 +1,7 @@
+# epiextractr 0.8.0
+* added `load_X` functions for given CPS sample `X`
+* added version/citation retrieval functions
+
 # epiextractr 0.7.0
 * add support for tidy selection syntax of variables
 
