@@ -39,9 +39,12 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="articles/epiextractr.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -71,44 +74,38 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>Load all variables in the 2018-2019 EPI CPS ORG extracts:</p>
+<p>Load a selection of variables from the 2018-2019 EPI CPS ORG extracts:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://economic.github.io/epiextractr">epiextractr</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/load_cps.html">load_cps</a></span><span class="op">(</span><span class="st">"org"</span>, <span class="fl">2018</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></code></pre></div>
-<p>Load a selection of variables from the 2019 EPI Basic CPS extracts:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/load_cps.html">load_cps</a></span><span class="op">(</span><span class="st">"basic"</span>, <span class="fl">2019</span>, <span class="va">basicwgt</span>, <span class="va">female</span>, <span class="va">hispanic</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/load_cps.html">load_org</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">:</span><span class="fl">2019</span>, <span class="va">year</span>, <span class="va">female</span>, <span class="va">wage</span>, <span class="va">orgwgt</span><span class="op">)</span>
+<span class="co">#&gt; Using EPI CPS ORG Extracts, Version 1.0.11</span>
+<span class="co">#&gt; # A tibble: 591,270 x 4</span>
+<span class="co">#&gt;     year orgwgt     female  wage</span>
+<span class="co">#&gt;    &lt;int&gt;  &lt;dbl&gt;  &lt;int+lbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt;  1  2018  8544. 0 [Male]    NA  </span>
+<span class="co">#&gt;  2  2018  5985. 1 [Female]  NA  </span>
+<span class="co">#&gt;  3  2018  7412. 1 [Female]  20.8</span>
+<span class="co">#&gt;  4  2018 16209. 1 [Female]  10  </span>
+<span class="co">#&gt;  5  2018  6954. 1 [Female]  25  </span>
+<span class="co">#&gt;  6  2018 10195. 1 [Female]   9.5</span>
+<span class="co">#&gt;  7  2018  8260. 0 [Male]    17  </span>
+<span class="co">#&gt;  8  2018  8544. 0 [Male]    NA  </span>
+<span class="co">#&gt;  9  2018  5985. 1 [Female]  NA  </span>
+<span class="co">#&gt; 10  2018  4852. 1 [Female]  NA  </span>
+<span class="co">#&gt; # … with 591,260 more rows</span></code></pre></div>
 </div>
 <div id="installation-and-basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-and-basic-usage" class="anchor"></a>Installation and basic usage</h2>
 <p>First, install the current version of the package from GitHub via devtools</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"economic/epiextractr"</span><span class="op">)</span></code></pre></div>
 <p>Then download the CPS microdata using <code><a href="reference/download_cps.html">download_cps()</a></code>. For example,</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">download_cps</span>(<span class="st">"org"</span>, <span class="st">"C:\data\cps</span><span class="ch">\"</span><span class="st">)</span></span></code></pre></div>
-<p>will download the latest EPI CPS ORG extracts from <a href="https://microdata.epi.org" class="uri">https://microdata.epi.org</a> and place them in <code>C:\data\cps\</code>. After the data is downloaded, load a selection of CPS data for your analysis:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/load_cps.html">load_cps</a></span><span class="op">(</span><span class="st">"org"</span>, <span class="fl">2000</span><span class="op">:</span><span class="fl">2019</span>, <span class="va">year</span>, <span class="va">orgwgt</span>, <span class="va">wage</span>, <span class="va">wbho</span><span class="op">)</span></code></pre></div>
-<div id="more-examples" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-examples" class="anchor"></a>More examples</h3>
-<div id="calculating-employment-rates-by-year-and-race" class="section level4">
-<h4 class="hasAnchor">
-<a href="#calculating-employment-rates-by-year-and-race" class="anchor"></a>Calculating employment rates by year and race</h4>
-<p>Calculate annual employment-to-population ratios by race/ethnicity from the 2010-2019 Basic CPS using tidyverse functions:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/load_cps.html">load_cps</a></span><span class="op">(</span><span class="st">"basic"</span>,
-         <span class="fl">1989</span><span class="op">:</span><span class="fl">2019</span>,
-         <span class="va">year</span>, <span class="va">basicwgt</span>, <span class="va">age</span>, <span class="va">wbhao</span>, <span class="va">emp</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">16</span> <span class="op">&amp;</span> <span class="va">basicwgt</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">group_by</span><span class="op">(</span><span class="va">year</span>, <span class="va">wbhao</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">summarize</span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">emp</span>, w <span class="op">=</span> <span class="va">basicwgt</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">mutate</span><span class="op">(</span>wbhao <span class="op">=</span> <span class="fu">str_to_lower</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://haven.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">wbhao</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">pivot_wider</span><span class="op">(</span><span class="va">year</span>, names_from <span class="op">=</span> <span class="va">wbhao</span><span class="op">)</span></code></pre></div>
-</div>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">download_cps</span>(<span class="st">"org"</span>, <span class="st">"C:\data\cps"</span>)</span></code></pre></div>
+<p>will download the latest EPI CPS ORG extracts from <a href="https://microdata.epi.org" class="uri">https://microdata.epi.org</a> and place them in the directory <code>C:\data\cps</code>.</p>
+<p>After the data is downloaded, load a selection of CPS data for your analysis:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">load_cps</span>(<span class="st">"org"</span>, <span class="dv">2000</span><span class="op">:</span><span class="dv">2019</span>, year, orgwgt, wage, wbho, <span class="dt">.extracts_dir =</span> <span class="st">"C:\data\cps"</span>)</span></code></pre></div>
+<p>See <code><a href="articles/epiextractr.html">vignette("epiextractr")</a></code> for more examples.</p>
 </div>
 </div>
   </div>

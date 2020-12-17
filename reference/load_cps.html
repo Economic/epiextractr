@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load CPS data — load_cps • epiextractr</title>
+<title>Load a selection of EPI CPS extracts — load_cps • epiextractr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Load CPS data — load_cps" />
-<meta property="og:description" content="More description" />
+<meta property="og:title" content="Load a selection of EPI CPS extracts — load_cps" />
+<meta property="og:description" content="Select years and variables from the EPI CPS microdata extracts. These data
+must first be downloaded using download_cps() or from
+https://microdata.epi.org." />
 
 
 
@@ -80,9 +82,12 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/epiextractr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -106,55 +111,77 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load CPS data</h1>
+    <h1>Load a selection of EPI CPS extracts</h1>
     
     <div class="hidden name"><code>load_cps.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>More description</p>
+    <p>Select years and variables from the EPI CPS microdata extracts. These data
+must first be downloaded using <code><a href='download_cps.html'>download_cps()</a></code> or from
+<a href='https://microdata.epi.org'>https://microdata.epi.org</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_cps</span><span class='op'>(</span>
-  <span class='va'>years</span>,
-  <span class='va'>sample</span>,
-  variables <span class='op'>=</span> <span class='cn'>NULL</span>,
-  extracts_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
-  version_check <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>load_cps</span><span class='op'>(</span><span class='va'>.sample</span>, <span class='va'>.years</span>, <span class='va'>...</span>, .extracts_dir <span class='op'>=</span> <span class='cn'>NULL</span>, .version_check <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>load_basic</span><span class='op'>(</span><span class='va'>.years</span>, <span class='va'>...</span>, .extracts_dir <span class='op'>=</span> <span class='cn'>NULL</span>, .version_check <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>load_may</span><span class='op'>(</span><span class='va'>.years</span>, <span class='va'>...</span>, .extracts_dir <span class='op'>=</span> <span class='cn'>NULL</span>, .version_check <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>load_org</span><span class='op'>(</span><span class='va'>.years</span>, <span class='va'>...</span>, .extracts_dir <span class='op'>=</span> <span class='cn'>NULL</span>, .version_check <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>years</th>
-      <td><p>years of CPS data (integers)</p></td>
-    </tr>
-    <tr>
-      <th>sample</th>
+      <th>.sample</th>
       <td><p>CPS sample ("org", "basic", "march", "may")</p></td>
     </tr>
     <tr>
-      <th>variables</th>
-      <td><p>variables to keep</p></td>
+      <th>.years</th>
+      <td><p>years of CPS data (integers)</p></td>
     </tr>
     <tr>
-      <th>extracts_dir</th>
+      <th>...</th>
+      <td><p>tidy selection of variables to keep</p></td>
+    </tr>
+    <tr>
+      <th>.extracts_dir</th>
       <td><p>directory where EPI extracts are</p></td>
     </tr>
     <tr>
-      <th>version_check</th>
+      <th>.version_check</th>
       <td><p>when TRUE, confirm data are same version</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble of CPS microdata</p>
+    <p>A tibble of CPS microdata</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Load CPS Details paragraph</p>
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    
+<ul>
+<li><p><code>load_cps</code>: base function group</p></li>
+<li><p><code>load_basic</code>: Load CPS Basic Monthly files</p></li>
+<li><p><code>load_may</code>: Load CPS May files</p></li>
+<li><p><code>load_org</code>: Load CPS ORG files</p></li>
+</ul>
+    <h2 class="hasAnchor" id="after-function-section"><a class="anchor" href="#after-function-section"></a>After function section</h2>
+
+    
+
+<p>Despite its location, this actually comes after the function section.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>load_cps</span><span class='op'>(</span>years <span class='op'>=</span> <span class='fl'>2018</span><span class='op'>:</span><span class='fl'>2019</span>, sample <span class='op'>=</span> <span class='st'>"org"</span><span class='op'>)</span>
+
+<span class='co'># These are equivalent:</span>
+<span class='fu'>load_org</span><span class='op'>(</span><span class='fl'>2019</span><span class='op'>:</span><span class='fl'>2020</span><span class='op'>)</span>
+<span class='fu'>load_cps</span><span class='op'>(</span><span class='st'>"org"</span>, <span class='fl'>2019</span><span class='op'>:</span><span class='fl'>2020</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
