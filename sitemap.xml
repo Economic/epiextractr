@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://economic.github.io/epiextractr/404.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/articles/epiextractr.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/authors.html</loc>
+  </url>
+  <url>
     <loc>https://economic.github.io/epiextractr/index.html</loc>
+  </url>
+  <url>
+    <loc>https://economic.github.io/epiextractr/news/index.html</loc>
   </url>
   <url>
     <loc>https://economic.github.io/epiextractr/reference/cps_metadata.html</loc>
@@ -10,9 +31,9 @@
     <loc>https://economic.github.io/epiextractr/reference/download_cps.html</loc>
   </url>
   <url>
-    <loc>https://economic.github.io/epiextractr/reference/load_cps.html</loc>
+    <loc>https://economic.github.io/epiextractr/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://economic.github.io/epiextractr/articles/epiextractr.html</loc>
+    <loc>https://economic.github.io/epiextractr/reference/load_cps.html</loc>
   </url>
 </urlset>
