@@ -4,10 +4,16 @@
 #' must first be downloaded using `download_cps()` or from
 #' \url{https://microdata.epi.org}.
 #'
-#' Load CPS Details paragraph
+#' All columns are selected if `...` is missing.
 #'
-#' @section After function section:
-#' Despite its location, this actually comes after the function section.
+#' `.extracts_dir` is required, but if NULL it will look for the environment variables
+#' ```
+#' EPIEXTRACTS_CPSBASIC_DIR
+#' EPIEXTRACTS_CPSORG_DIR
+#' EPIEXTRACTS_CPSMAY_DIR
+#' ```
+#' which could be set in your .Renviron, for example.
+#'
 #' @describeIn load_cps base function group
 #'
 #' @param .sample CPS sample ("org", "basic", "march", "may")
@@ -19,8 +25,15 @@
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom haven labelled
+#' @importFrom dplyr select
+#' @importFrom rlang enquos
 #' @examples
 #' \dontrun{
+#' # Load all of the 2019-2020 CPS Basic columns
+#' load_basic(2019:2020)
+#'
+#' # Load a selection of 2010-2019 CPS ORG columns:
+#' load_org(2010:2019, year, month, orgwgt, female, wage)
 #'
 #' # These are equivalent:
 #' load_org(2019:2020)
@@ -55,8 +68,13 @@ load_cps <- function(.sample,
     # stack the data and add version attributes
     bind_cps(version_check = .version_check)
 
+  # display version information
   if (.version_check) message(paste("Using", attr(the_data, "label")))
-  the_data
+
+  # re-order & return columns
+  dots <- enquos(...)
+  if(length(dots) == 0) the_data
+  else select(the_data, ...)
 
 }
 
@@ -145,7 +163,7 @@ read_single_year <- function(sample,
     }
     # abort when no data found
     else {
-      rlang::abort(paste(extracts_dir, "does not contain data for the year", year))
+      rlang::abort(paste(extracts_dir, "does not contain data for the year", year, "\nPlease specify a valid location for the data with the argument .extracts_dir"))
     }
   }
 

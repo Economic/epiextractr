@@ -35,26 +35,35 @@ must first be downloaded using \code{download_cps()} or from
 \url{https://microdata.epi.org}.
 }
 \details{
-Load CPS Details paragraph
+All columns are selected if \code{...} is missing.
+
+\code{.extracts_dir} is required, but if NULL it will look for the environment variables
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{EPIEXTRACTS_CPSBASIC_DIR
+EPIEXTRACTS_CPSORG_DIR
+EPIEXTRACTS_CPSMAY_DIR
+}\if{html}{\out{</div>}}
+
+which could be set in your .Renviron, for example.
 }
 \section{Functions}{
 \itemize{
-\item \code{load_cps}: base function group
+\item \code{load_cps()}: base function group
 
-\item \code{load_basic}: Load CPS Basic Monthly files
+\item \code{load_basic()}: Load CPS Basic Monthly files
 
-\item \code{load_may}: Load CPS May files
+\item \code{load_may()}: Load CPS May files
 
-\item \code{load_org}: Load CPS ORG files
+\item \code{load_org()}: Load CPS ORG files
+
 }}
-
-\section{After function section}{
-
-Despite its location, this actually comes after the function section.
-}
-
 \examples{
 \dontrun{
+# Load all of the 2019-2020 CPS Basic columns
+load_basic(2019:2020)
+
+# Load a selection of 2010-2019 CPS ORG columns:
+load_org(2010:2019, year, month, orgwgt, female, wage)
 
 # These are equivalent:
 load_org(2019:2020)

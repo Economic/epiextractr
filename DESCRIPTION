@@ -1,7 +1,7 @@
 Package: epiextractr
 Type: Package
 Title: Tools to use Economic Policy Institute Microdata Extracts 
-Version: 0.8.0
+Version: 0.8.1
 Authors@R: 
     c(person(given = "Ben",
              family = "Zipperer",
@@ -35,5 +35,4 @@ Suggests:
     tidyverse
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-
+RoxygenNote: 7.2.1

@@ -1,3 +1,6 @@
+# epiextractr 0.8.1
+* if exists respect user-specified column order in `load_X`
+
 # epiextractr 0.8.0
 * added `load_X` functions for given CPS sample `X`
 * added version/citation retrieval functions

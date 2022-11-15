@@ -30,7 +30,7 @@ cps_citation <- function(x) {
 
   message(paste("You can cite", deparse(substitute(x)), "like the following:"))
 
-  paste0("Economic Policy Institute. 2020. Current Population Survey Extracts, Version ", version_number, ", https://microdata.epi.org.")
+  paste0("Economic Policy Institute. 2022. Current Population Survey Extracts, Version ", version_number, ", https://microdata.epi.org.")
 }
 
 #' @export

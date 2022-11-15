@@ -23,27 +23,27 @@ org_exists <- file.exists(Sys.getenv("EPIEXTRACTS_CPSORG_DIR"))
 epiextractr makes it easy to use the [EPI microdata extracts](https://microdata.epi.org/) in R.
 
 ## Example
-Load a selection of variables from the 2018-2019 EPI CPS ORG extracts:
+Load a selection of variables from the 2019-2021 EPI CPS ORG extracts:
 ```{r, eval = org_exists}
 library(epiextractr)
-load_org(2018:2019, year, female, wage, orgwgt)
+load_org(2019:2021, year, female, wage, orgwgt)
 ```
 ```{r, echo = FALSE, eval = !org_exists}
 cat("
-# A tibble: 591,270 x 4
-    year orgwgt     female  wage
-   <int>  <dbl>  <int+lbl> <dbl>
- 1  2018  8544. 0 [Male]    NA  
- 2  2018  5985. 1 [Female]  NA  
- 3  2018  7412. 1 [Female]  20.8
- 4  2018 16209. 1 [Female]  10  
- 5  2018  6954. 1 [Female]  25  
- 6  2018 10195. 1 [Female]   9.5
- 7  2018  8260. 0 [Male]    17  
- 8  2018  8544. 0 [Male]    NA  
- 9  2018  5985. 1 [Female]  NA  
-10  2018  4852. 1 [Female]  NA  
-# … with 591,260 more rows
+# A tibble: 824,963 × 4
+    year orgwgt female      wage
+   <int>  <dbl> <int+lbl>  <dbl>
+ 1  2019 11367. 1 [Female] 14   
+ 2  2019  6541. 1 [Female] 20.9 
+ 3  2019  6327. 0 [Male]    7.65
+ 4  2019  6327. 0 [Male]    7.65
+ 5  2019 11262. 1 [Female] 10   
+ 6  2019  7867. 1 [Female] 28.8 
+ 7  2019 11262. 1 [Female] 11   
+ 8  2019  7943. 0 [Male]   NA   
+ 9  2019  6092. 1 [Female] NA   
+10  2019  7738. 0 [Male]   NA   
+# … with 824,953 more rows
 ")
 ```
 
@@ -58,7 +58,7 @@ Then download the CPS microdata using `download_cps()`. For example,
 ```{r, eval = FALSE}
 download_cps("org", "C:\data\cps")
 ```
-will download the latest EPI CPS ORG extracts from https://microdata.epi.org and place them in the directory `C:\data\cps`.
+will download the latest EPI CPS ORG extracts in .feather format from https://microdata.epi.org and place them in the directory `C:\data\cps`.
 
 After the data is downloaded, load a selection of CPS data for your analysis:
 ```{r, eval = FALSE}
