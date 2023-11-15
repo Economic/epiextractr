@@ -1,7 +1,7 @@
 Package: epiextractr
 Type: Package
 Title: Tools to use Economic Policy Institute Microdata Extracts 
-Version: 0.8.1
+Version: 0.8.2
 Authors@R: 
     c(person(given = "Ben",
              family = "Zipperer",
@@ -9,7 +9,7 @@ Authors@R:
              email = "benzipperer@gmail.com"),
       person(given = "Jori",
              family = "Kandra",
-             role = "aut",
+             role = "ctb",
              email = "jkandra@epi.org"),
       person(given = "Economic Policy Institute",
              role = c("cph", "fnd")))
@@ -26,8 +26,8 @@ Imports:
     rlang,
     data.table,
     utils,
-    tidyselect,
-    haven
+    haven,
+    dplyr
 Suggests: 
     knitr,
     rmarkdown,
@@ -35,4 +35,4 @@ Suggests:
     tidyverse
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

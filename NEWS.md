@@ -1,3 +1,6 @@
+# epiextractr 0.8.2
+* fix DESCRIPTION imports warning to make r-universe friendly
+
 # epiextractr 0.8.1
 * if exists respect user-specified column order in `load_X`
 
