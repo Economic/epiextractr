@@ -3,7 +3,7 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   epiextractr: epiextractr.html
-last_built: 2024-07-25T02:51Z
+last_built: 2024-07-25T16:23Z
 urls:
   reference: https://economic.github.io/epiextractr/reference
   article: https://economic.github.io/epiextractr/articles
