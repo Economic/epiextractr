@@ -5,6 +5,7 @@
 \alias{load_basic}
 \alias{load_may}
 \alias{load_org}
+\alias{load_org_sample}
 \title{Load a selection of EPI CPS extracts}
 \usage{
 load_cps(.sample, .years, ..., .extracts_dir = NULL, .version_check = TRUE)
@@ -14,6 +15,8 @@ load_basic(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
 load_may(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
 
 load_org(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+
+load_org_sample(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
 }
 \arguments{
 \item{.sample}{CPS sample ("org", "basic", "march", "may")}
@@ -55,6 +58,8 @@ which could be set in your .Renviron, for example.
 \item \code{load_may()}: Load CPS May files
 
 \item \code{load_org()}: Load CPS ORG files
+
+\item \code{load_org_sample()}: Load a demonstration sample of CPS ORG files; only useful for examples
 
 }}
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_data.R
 \name{download_cps}
 \alias{download_cps}
-\title{Download CPS data}
+\title{Download EPI CPS extracts data}
 \usage{
 download_cps(sample, extracts_dir = NULL, overwrite = FALSE)
 }
@@ -17,7 +17,7 @@ download_cps(sample, extracts_dir = NULL, overwrite = FALSE)
 downloaded files
 }
 \description{
-More description
+Download the EPI CPS extracts to your local machine
 }
 \examples{
 \dontrun{

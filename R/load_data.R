@@ -50,10 +50,24 @@ load_cps <- function(.sample,
 
   # check extracts_dir
   if (is.null(.extracts_dir)) {
-    # use environment variable dir if available
-    .extracts_dir <- Sys.getenv(paste0("EPIEXTRACTS_CPS", toupper(.sample), "_DIR"))
-    if (.extracts_dir == "") .extracts_dir <- getwd()
+
+    # sample data gets special consideration
+    if (.sample == "org_sample") {
+      .extracts_dir = system.file(
+        "extdata",
+        package = "epiextractr",
+        mustWork = TRUE
+      )
+    }
+
+    else {
+      # use environment variable dir if available
+      .extracts_dir <- Sys.getenv(paste0("EPIEXTRACTS_CPS", toupper(.sample), "_DIR"))
+      if (.extracts_dir == "") .extracts_dir <- getwd()
+    }
+
   }
+
 
   # read the data into single list
   the_data <-
@@ -111,6 +125,19 @@ load_org <- function(.years,
                      .extracts_dir = NULL,
                      .version_check = TRUE) {
   load_cps(.sample = "org",
+           .years = .years,
+           ...,
+           .extracts_dir = .extracts_dir,
+           .version_check = .version_check)
+}
+
+#' @export
+#' @describeIn load_cps Load a demonstration sample of CPS ORG files; only useful for examples
+load_org_sample <- function(.years,
+                     ...,
+                     .extracts_dir = NULL,
+                     .version_check = TRUE) {
+  load_cps(.sample = "org_sample",
            .years = .years,
            ...,
            .extracts_dir = .extracts_dir,

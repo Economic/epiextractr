@@ -49,9 +49,9 @@ cat("
 
 ## Installation and basic usage
 
-First, install the current version of the package from GitHub via devtools 
+First, install the current version of the package from R-Universe:
 ```{r, eval = FALSE}
-devtools::install_github("economic/epiextractr")
+install.packages("epiextractr", repos = "https://economic.r-universe.dev")
 ```
 
 Then download the CPS microdata using `download_cps()`. For example,

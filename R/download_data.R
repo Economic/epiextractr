@@ -1,6 +1,6 @@
-#' Download CPS data
+#' Download EPI CPS extracts data
 #'
-#' More description
+#' Download the EPI CPS extracts to your local machine
 #'
 #' @param sample CPS sample ("org", "basic", "may")
 #' @param extracts_dir directory where EPI extracts should be placed

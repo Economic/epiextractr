@@ -4,9 +4,14 @@ template:
   params:
     bootswatch: flatly
 
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/economic/epiextractr
+
 home:
   links:
-  - text: Browse source code at
-    href: https://github.com/Economic/epiextractr
   - text: Underlying EPI microdata extracts
     href: https://microdata.epi.org
+  - text: EPI State of Working America Data Library
+    href: https://epi.org/data

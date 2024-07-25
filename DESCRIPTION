@@ -1,16 +1,12 @@
 Package: epiextractr
 Type: Package
 Title: Tools to use Economic Policy Institute Microdata Extracts 
-Version: 0.8.2
+Version: 0.9.0
 Authors@R: 
     c(person(given = "Ben",
              family = "Zipperer",
              role = c("aut", "cre"),
              email = "benzipperer@gmail.com"),
-      person(given = "Jori",
-             family = "Kandra",
-             role = "ctb",
-             email = "jkandra@epi.org"),
       person(given = "Economic Policy Institute",
              role = c("cph", "fnd")))
 Description: Tools to download and load the EPI microdata extracts from microdata.epi.org.
@@ -35,4 +31,4 @@ Suggests:
     tidyverse
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

@@ -3,7 +3,7 @@ valid_sample_name <- function(x) {
 
   # check sample
   x <- tolower(x)
-  if (! x %in% c("basic", "march", "may", "org")) {
+  if (! x %in% c("basic", "march", "may", "org", "org_sample")) {
     rlang::abort("Available CPS samples: Basic, March, May, ORG")
   }
   x

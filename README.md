@@ -16,7 +16,7 @@ Load a selection of variables from the 2019-2021 EPI CPS ORG extracts:
 ``` r
 library(epiextractr)
 load_org(2019:2021, year, female, wage, orgwgt)
-#> Using EPI CPS ORG Extracts, Version 1.0.35
+#> Using EPI CPS ORG Extracts, Version 1.0.54
 #> # A tibble: 824,963 × 4
 #>     year female      wage orgwgt
 #>    <int> <int+lbl>  <dbl>  <dbl>
@@ -30,16 +30,15 @@ load_org(2019:2021, year, female, wage, orgwgt)
 #>  8  2019 0 [Male]   NA     7943.
 #>  9  2019 1 [Female] NA     6092.
 #> 10  2019 0 [Male]   NA     7738.
-#> # … with 824,953 more rows
+#> # ℹ 824,953 more rows
 ```
 
 ## Installation and basic usage
 
-First, install the current version of the package from GitHub via
-devtools
+First, install the current version of the package from R-Universe:
 
 ``` r
-devtools::install_github("economic/epiextractr")
+install.packages("epiextractr", repos = "https://economic.r-universe.dev")
 ```
 
 Then download the CPS microdata using `download_cps()`. For example,

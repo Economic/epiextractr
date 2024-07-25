@@ -1,3 +1,6 @@
+# epiextractr 0.9.0
+* add example data "org_sample" available through `load_cps()` and `load_org_sample()`
+
 # epiextractr 0.8.2
 * fix DESCRIPTION imports warning to make r-universe friendly
 
