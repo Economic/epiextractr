@@ -38,7 +38,7 @@ load_org(2019:2021, year, female, wage, orgwgt)
 First, install the current version of the package from R-Universe:
 
 ``` r
-install.packages("epiextractr", repos = "https://economic.r-universe.dev")
+install.packages("epiextractr", repos = c("https://economic.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 Then download the CPS microdata using `download_cps()`. For example,
