@@ -16,7 +16,7 @@ Load a selection of variables from the 2019-2021 EPI CPS ORG extracts:
 ``` r
 library(epiextractr)
 load_org(2019:2021, year, female, wage, orgwgt)
-#> Using EPI CPS ORG Extracts, Version 1.0.54
+#> Using EPI CPS ORG Extracts, Version 1.0.55
 #> # A tibble: 824,963 × 4
 #>     year female      wage orgwgt
 #>    <int> <int+lbl>  <dbl>  <dbl>

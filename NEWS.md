@@ -1,3 +1,6 @@
+# epiextractr 0.9.1
+* update example data to increase compatibility with new `arrow` package
+
 # epiextractr 0.9.0
 * add example data "org_sample" available through `load_cps()` and `load_org_sample()`
 
