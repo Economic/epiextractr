@@ -1,3 +1,6 @@
+# epiextractr 0.9.2
+* fix `cps_citation()` to use correct year
+
 # epiextractr 0.9.1
 * update example data to increase compatibility with new `arrow` package
 
