@@ -27,10 +27,11 @@ cps_version <- function(x) {
 cps_citation <- function(x) {
   assert_valid_extract(x)
   version_number <- attributes(x)$version
+  year <- substr(version_number, 1, 4)
 
   message(paste("You can cite", deparse(substitute(x)), "like the following:"))
 
-  paste0("Economic Policy Institute. 2022. Current Population Survey Extracts, Version ", version_number, ", https://microdata.epi.org.")
+  paste0("Economic Policy Institute. ", year, ". Current Population Survey Extracts, Version ", version_number, ", https://microdata.epi.org.")
 }
 
 #' @export
