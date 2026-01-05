@@ -170,6 +170,10 @@ read_single_year <- function(sample,
 
   if (file.exists(full_feather_filename)) {
     return(arrow::read_feather(full_feather_filename, col_select = c(...)))
+
+    if (year == 2025) {
+      message(paste("Data for year", year, "only includes months", months))
+    }
   }
   else {
     monthly_prefix <- paste0("epi_cps", sample, "_", year, "_")
