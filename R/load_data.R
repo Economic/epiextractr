@@ -82,6 +82,8 @@ load_cps <- function(.sample,
     # stack the data and add version attributes
     bind_cps(version_check = .version_check)
 
+  if (any(.years == 2025)) message(paste("Data for year 2025 excludes October"))
+  
   # display version information
   if (.version_check) message(paste("Using", attr(the_data, "label")))
 
@@ -171,9 +173,7 @@ read_single_year <- function(sample,
   if (file.exists(full_feather_filename)) {
     return(arrow::read_feather(full_feather_filename, col_select = c(...)))
 
-    if (year == 2025) {
-      message(paste("Data for year", year, "only includes months", months))
-    }
+
   }
   else {
     monthly_prefix <- paste0("epi_cps", sample, "_", year, "_")
