@@ -1,3 +1,6 @@
+# epiextractr 0.9.3
+* add note about data missing for October 2025 to `load_X()` output
+
 # epiextractr 0.9.2
 * fix `cps_citation()` to use correct year
 
