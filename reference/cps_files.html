@@ -20,7 +20,7 @@ load_basic(), etc. wrappers in place of .years."><!-- mathjax --><script src="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">epiextractr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.11.0</span>
       </span>
     </div>
 
@@ -62,7 +62,12 @@ The result can be passed directly to <code><a href="load_cps.html">load_cps()</a
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cps_files</span><span class="op">(</span><span class="va">sample</span>, <span class="va">years</span>, extracts_dir <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cps_files</span><span class="op">(</span></span>
+<span>  <span class="va">sample</span>,</span>
+<span>  <span class="va">years</span>,</span>
+<span>  extracts_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .quiet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"epiextractr.quiet"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -80,6 +85,11 @@ The result can be passed directly to <code><a href="load_cps.html">load_cps()</a
 <dt id="arg-extracts-dir">extracts_dir<a class="anchor" aria-label="anchor" href="#arg-extracts-dir"></a></dt>
 <dd><p>directory where EPI extracts are</p></dd>
 
+
+<dt id="arg--quiet">.quiet<a class="anchor" aria-label="anchor" href="#arg--quiet"></a></dt>
+<dd><p>Logical. Suppress informational messages? Defaults to
+<code>getOption("epiextractr.quiet", FALSE)</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -88,34 +98,34 @@ The result can be passed directly to <code><a href="load_cps.html">load_cps()</a
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cps_files</span><span class="op">(</span><span class="st">"org_sample"</span>, <span class="fl">2019</span><span class="op">:</span><span class="fl">2023</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2019.feather"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2020.feather"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2021.feather"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2022.feather"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2023.feather"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cps_files</span><span class="op">(</span><span class="st">"org_sample"</span>, <span class="fl">2023</span><span class="op">:</span><span class="fl">2025</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Data for year 2025 excludes October</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2023.feather"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2024.feather"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2025.feather"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cps_files"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"sample")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "org_sample"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Pass directly to load functions:</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="load_cps.html">load_org_sample</a></span><span class="op">(</span><span class="fu">cps_files</span><span class="op">(</span><span class="st">"org_sample"</span>, <span class="fl">2019</span><span class="op">:</span><span class="fl">2023</span><span class="op">)</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">wage</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using Demonstration sample EPI CPS ORG Extracts, Version 1.0.55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,318,922 × 3</span></span>
+<span class="r-in"><span><span class="fu"><a href="load_cps.html">load_org_sample</a></span><span class="op">(</span><span class="fu">cps_files</span><span class="op">(</span><span class="st">"org_sample"</span>, <span class="fl">2023</span><span class="op">:</span><span class="fl">2025</span><span class="op">)</span>, <span class="va">year</span>, <span class="va">month</span>, <span class="va">wage</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Data for year 2025 excludes October</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Using Demonstration sample EPI CPS ORG Extracts, Version 2026.2.12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 700,029 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     year month  wage</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>019     1 14   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>019     1 20.9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>019     1  7.65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>019     1  7.65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>019     1 10   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>019     1 28.8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>019     1 11   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>019     1 <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>019     1 <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>019     1 <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,318,912 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>023     1  27.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>023     1  11  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>023     1  41.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>023     1  <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 700,019 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Use with targets</span></span></span>
