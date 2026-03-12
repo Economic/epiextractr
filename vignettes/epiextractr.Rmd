@@ -37,8 +37,7 @@ load_org(2019:2021, year, female, wage, orgwgt, .extracts_dir = "C:/data/cps")
 load_org(2019:2021, year, female, wage, orgwgt)
 ```
 ```{r, echo = FALSE, eval = !org_exists}
-cat("
-# A tibble: 824,963 × 4
+cat("# A tibble: 824,963 × 4
     year orgwgt female      wage
    <int>  <dbl> <int+lbl>  <dbl>
  1  2019 11367. 1 [Female] 14   
@@ -79,23 +78,20 @@ Calculate annual employment-to-population ratios by race/ethnicity from the 2010
 library(tidyverse)
 load_cps("basic", 2010:2019, year, basicwgt, wbhao, emp) %>%
   filter(basicwgt > 0) %>%
-  group_by(year, wbhao) %>%
-  summarize(value = weighted.mean(emp, w = basicwgt)) %>%
+  summarize(value = weighted.mean(emp, w = basicwgt), .by = c(year, wbhao)) %>%
   mutate(name = as.character(haven::as_factor(wbhao))) %>%
-  pivot_wider(year)
+  pivot_wider(id_cols = year)
 ```
 ```{r, echo=FALSE, message = FALSE, eval = basic_exists}
 library(tidyverse)
 load_cps("basic", 2010:2019, year, basicwgt, wbhao, emp) %>%
   filter(basicwgt > 0) %>%
-  group_by(year, wbhao) %>%
-  summarize(value = weighted.mean(emp, w = basicwgt)) %>%
+  summarize(value = weighted.mean(emp, w = basicwgt), .by = c(year, wbhao)) %>%
   mutate(name = as.character(haven::as_factor(wbhao))) %>%
-  pivot_wider(year)
+  pivot_wider(id_cols = year)
 ```
 ```{r, echo=FALSE, eval = !basic_exists}
-cat("
-# A tibble: 10 × 6
+cat("# A tibble: 10 × 6
 # Groups:   year [10]
     year White Black Hispanic Asian Other
    <int> <dbl> <dbl>    <dbl> <dbl> <dbl>

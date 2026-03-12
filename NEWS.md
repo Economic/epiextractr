@@ -1,3 +1,7 @@
+# epiextractr 0.10.0
+* add `cps_files()` to return file paths for CPS extracts, enabling targets-based workflows
+* `load_org()`, `load_basic()`, `load_may()`, and other `load_X()` functions now accept file paths from `cps_files()` in place of `.years`
+
 # epiextractr 0.9.3
 * add note about data missing for October 2025 to `load_X()` output
 

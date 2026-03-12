@@ -5,10 +5,17 @@ load_write_parquet = function(year) {
   file_name = file.path("inst", "extdata", file_name)
 
   vars = c(
-    "year", "month", "orgwgt",
-    "statefips", "wbho", "female", "educ",
-    "wage", "wageotc",
-    "emp", "lfstat"
+    "year",
+    "month",
+    "orgwgt",
+    "statefips",
+    "wbho",
+    "female",
+    "educ",
+    "wage",
+    "wageotc",
+    "emp",
+    "lfstat"
   )
 
   data = epiextractr::load_org(year, all_of(vars))

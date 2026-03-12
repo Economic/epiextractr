@@ -7,3 +7,6 @@
 ^\.github$
 ^README\.Rmd$
 ^data-raw$
+^\.claude$
+^CLAUDE\.md$
+^plans$

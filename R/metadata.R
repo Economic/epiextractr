@@ -7,12 +7,9 @@
 #'
 #' `assert_cps_version` returns an error when the provided version is incorrect.
 #' @examples
-#' \dontrun{
-#' cps_org <- load_org(2018:2020)
+#' cps_org <- load_org_sample(2019:2023)
 #' cps_citation(cps_org)
 #' cps_version(cps_org)
-#' assert_cps_version(cps_org, "1.0.11")
-#' }
 #' @name cps_metadata
 
 #' @export
@@ -31,7 +28,13 @@ cps_citation <- function(x) {
 
   message(paste("You can cite", deparse(substitute(x)), "like the following:"))
 
-  paste0("Economic Policy Institute. ", year, ". Current Population Survey Extracts, Version ", version_number, ", https://microdata.epi.org.")
+  paste0(
+    "Economic Policy Institute. ",
+    year,
+    ". Current Population Survey Extracts, Version ",
+    version_number,
+    ", https://microdata.epi.org."
+  )
 }
 
 #' @export
@@ -43,12 +46,4 @@ assert_cps_version <- function(x, version) {
       paste0("Version number is ", version_number, ", not ", version)
     )
   }
-
 }
-
-
-
-
-
-
-

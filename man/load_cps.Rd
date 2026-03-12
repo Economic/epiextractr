@@ -21,7 +21,7 @@ load_org_sample(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
 \arguments{
 \item{.sample}{CPS sample ("org", "basic", "march", "may")}
 
-\item{.years}{years of CPS data (integers)}
+\item{.years}{years of CPS data (integers), or a \code{cps_files} object}
 
 \item{...}{tidy selection of variables to keep}
 
@@ -39,6 +39,10 @@ must first be downloaded using \code{download_cps()} or from
 }
 \details{
 All columns are selected if \code{...} is missing.
+
+\code{.years} accepts either integer years or the result of \code{cps_files()}.
+When a \code{cps_files} object is passed, the files are read directly and
+\code{.extracts_dir} is ignored.
 
 \code{.extracts_dir} is required, but if NULL it will look for the environment variables
 
@@ -63,15 +67,21 @@ which could be set in your .Renviron, for example.
 
 }}
 \examples{
-\dontrun{
-# Load all of the 2019-2020 CPS Basic columns
-load_basic(2019:2020)
+# Load all columns from the demonstration sample
+load_org_sample(2019:2020)
 
-# Load a selection of 2010-2019 CPS ORG columns:
-load_org(2010:2019, year, month, orgwgt, female, wage)
+# Load a selection of columns
+load_org_sample(2019:2023, year, month, female, wage)
 
 # These are equivalent:
-load_org(2019:2020)
-load_cps("org", 2019:2020)
+load_org_sample(2019:2020)
+load_cps("org_sample", 2019:2020)
+
+# Use cps_files() for targets workflows:
+load_org_sample(cps_files("org_sample", 2019:2023), year, month, wage)
+
+\dontrun{
+# Load real CPS ORG data (requires downloaded extracts):
+load_org(2010:2019, year, month, orgwgt, female, wage)
 }
 }
