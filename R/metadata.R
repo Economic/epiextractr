@@ -7,7 +7,7 @@
 #'
 #' `assert_cps_version` returns an error when the provided version is incorrect.
 #' @examples
-#' cps_org <- load_org_sample(2019:2023)
+#' cps_org <- load_org_sample(2023:2025)
 #' cps_citation(cps_org)
 #' cps_version(cps_org)
 #' @name cps_metadata
@@ -26,7 +26,9 @@ cps_citation <- function(x) {
   version_number <- attributes(x)$version
   year <- substr(version_number, 1, 4)
 
-  message(paste("You can cite", deparse(substitute(x)), "like the following:"))
+  cli::cli_alert_info(
+    "You can cite {.var {deparse(substitute(x))}} as follows:"
+  )
 
   paste0(
     "Economic Policy Institute. ",
@@ -42,8 +44,8 @@ cps_citation <- function(x) {
 assert_cps_version <- function(x, version) {
   version_number <- cps_version(x)
   if (!version_number == version) {
-    rlang::abort(
-      paste0("Version number is ", version_number, ", not ", version)
+    cli::cli_abort(
+      "Version number is {.val {version_number}}, not {.val {version}}."
     )
   }
 }

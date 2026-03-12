@@ -19,42 +19,30 @@ download_cps <- function(sample, extracts_dir = NULL, overwrite = FALSE) {
 
   # require extracts dir
   if (is.null(extracts_dir)) {
-    rlang::abort(
-      "extracts_dir must specify a directory into which to extract the data"
+    cli::cli_abort(
+      "{.arg extracts_dir} must specify a directory into which to extract the data."
     )
   }
   if (!file.exists(extracts_dir)) {
-    rlang::abort(paste("Directory", extracts_dir, "does not exist"))
+    cli::cli_abort("Directory {.path {extracts_dir}} does not exist.")
   }
 
   # deal with existing files
   existing_files <- dir(extracts_dir, pattern = paste0("epi_cps", sample))
   if (!overwrite & length(existing_files) != 0) {
-    rlang::abort(paste(
-      extracts_dir,
-      "contains existing EPI CPS",
-      sample,
-      "extracts. Please delete them or specify overwrite = TRUE"
+    cli::cli_abort(c(
+      "{.path {extracts_dir}} contains existing EPI CPS {sample} extracts.",
+      "i" = "Delete them or specify {.code overwrite = TRUE}."
     ))
   } else if (overwrite & length(existing_files) != 0) {
-    message(paste(
-      "Deleting existing EPI CPS",
-      sample,
-      "extracts in",
-      extracts_dir,
-      "..."
-    ))
+    cli::cli_alert_info(
+      "Deleting existing EPI CPS {sample} extracts in {.path {extracts_dir}}..."
+    )
     unlink(existing_files)
   } else if (overwrite & length(existing_files) == 0) {
-    warning(paste(
-      "You requested to overwrite existing EPI CPS",
-      sample,
-      "extracts, but no such files were already in specified extracts_dir"
-    ))
-    warning(paste(
-      "We downloaded the data to",
-      extracts_dir,
-      "but you might want to double-check if that's really where you wanted the data."
+    cli::cli_warn(c(
+      "No existing EPI CPS {sample} extracts found in {.path {extracts_dir}}.",
+      "i" = "Data was downloaded, but double-check this is the right location."
     ))
   }
 
@@ -72,7 +60,7 @@ download_cps <- function(sample, extracts_dir = NULL, overwrite = FALSE) {
   temp_dest <- tempfile()
   download.file(download_path, temp_dest)
 
-  message("Decompressing files...")
+  cli::cli_alert_info("Decompressing files...")
   untar(temp_dest, exdir = path.expand(extracts_dir))
 
   unlink(temp_dest)

@@ -27,7 +27,7 @@ assert_cps_version(x, version)
 Retrieve metadata from CPS extract
 }
 \examples{
-cps_org <- load_org_sample(2019:2023)
+cps_org <- load_org_sample(2023:2025)
 cps_citation(cps_org)
 cps_version(cps_org)
 }

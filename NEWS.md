@@ -1,3 +1,7 @@
+# epiextractr 0.11.0
+* add `.quiet` argument to `load_cps()`, `load_org()`, `load_basic()`, `load_may()`, `load_org_sample()`, and `cps_files()` to suppress informational messages
+* support global option `options(epiextractr.quiet = TRUE)` to silence messages for an entire session
+
 # epiextractr 0.10.0
 * add `cps_files()` to return file paths for CPS extracts, enabling targets-based workflows
 * `load_org()`, `load_basic()`, `load_may()`, and other `load_X()` functions now accept file paths from `cps_files()` in place of `.years`

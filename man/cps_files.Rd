@@ -4,7 +4,12 @@
 \alias{cps_files}
 \title{Get file paths for EPI CPS extracts}
 \usage{
-cps_files(sample, years, extracts_dir = NULL)
+cps_files(
+  sample,
+  years,
+  extracts_dir = NULL,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 }
 \arguments{
 \item{sample}{CPS sample ("org", "basic", "march", "may")}
@@ -12,6 +17,9 @@ cps_files(sample, years, extracts_dir = NULL)
 \item{years}{years of CPS data (integers)}
 
 \item{extracts_dir}{directory where EPI extracts are}
+
+\item{.quiet}{Logical. Suppress informational messages? Defaults to
+\code{getOption("epiextractr.quiet", FALSE)}.}
 }
 \value{
 A character vector of file paths with class \code{"cps_files"}
@@ -23,10 +31,10 @@ The result can be passed directly to \code{load_cps()} or the \code{load_org()},
 \code{load_basic()}, etc. wrappers in place of \code{.years}.
 }
 \examples{
-cps_files("org_sample", 2019:2023)
+cps_files("org_sample", 2023:2025)
 
 # Pass directly to load functions:
-load_org_sample(cps_files("org_sample", 2019:2023), year, month, wage)
+load_org_sample(cps_files("org_sample", 2023:2025), year, month, wage)
 
 \dontrun{
 # Use with targets

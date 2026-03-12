@@ -8,15 +8,46 @@
 \alias{load_org_sample}
 \title{Load a selection of EPI CPS extracts}
 \usage{
-load_cps(.sample, .years, ..., .extracts_dir = NULL, .version_check = TRUE)
+load_cps(
+  .sample,
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 
-load_basic(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+load_basic(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 
-load_may(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+load_may(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 
-load_org(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+load_org(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 
-load_org_sample(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
+load_org_sample(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 }
 \arguments{
 \item{.sample}{CPS sample ("org", "basic", "march", "may")}
@@ -28,6 +59,9 @@ load_org_sample(.years, ..., .extracts_dir = NULL, .version_check = TRUE)
 \item{.extracts_dir}{directory where EPI extracts are}
 
 \item{.version_check}{when TRUE, confirm data are same version}
+
+\item{.quiet}{Logical. Suppress informational messages? Defaults to
+\code{getOption("epiextractr.quiet", FALSE)}.}
 }
 \value{
 A tibble of CPS microdata
@@ -68,20 +102,19 @@ which could be set in your .Renviron, for example.
 }}
 \examples{
 # Load all columns from the demonstration sample
-load_org_sample(2019:2020)
+load_org_sample(2023:2024)
 
 # Load a selection of columns
-load_org_sample(2019:2023, year, month, female, wage)
-
-# These are equivalent:
-load_org_sample(2019:2020)
-load_cps("org_sample", 2019:2020)
+load_org_sample(2023:2025, year, month, female, wage)
 
 # Use cps_files() for targets workflows:
-load_org_sample(cps_files("org_sample", 2019:2023), year, month, wage)
+org_files = cps_files("org_sample", 2023:2025)
+load_org_sample(org_files, year, month, wage)
 
 \dontrun{
 # Load real CPS ORG data (requires downloaded extracts):
 load_org(2010:2019, year, month, orgwgt, female, wage)
+# This is equivalent to
+load_cps("org", 2010:2019, year, month, orgwgt, female, wage)
 }
 }

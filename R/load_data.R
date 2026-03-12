@@ -8,13 +8,15 @@
 #' @param sample CPS sample ("org", "basic", "march", "may")
 #' @param years years of CPS data (integers)
 #' @param extracts_dir directory where EPI extracts are
+#' @param .quiet Logical. Suppress informational messages? Defaults to
+#'   `getOption("epiextractr.quiet", FALSE)`.
 #' @return A character vector of file paths with class `"cps_files"`
 #' @export
 #' @examples
-#' cps_files("org_sample", 2019:2023)
+#' cps_files("org_sample", 2023:2025)
 #'
 #' # Pass directly to load functions:
-#' load_org_sample(cps_files("org_sample", 2019:2023), year, month, wage)
+#' load_org_sample(cps_files("org_sample", 2023:2025), year, month, wage)
 #'
 #' \dontrun{
 #' # Use with targets
@@ -24,30 +26,22 @@
 #'   org_data = load_org(org_files, year, month, wage) |> tar_target()
 #' })
 #' }
-cps_files <- function(sample, years, extracts_dir = NULL) {
+cps_files <- function(
+  sample,
+  years,
+  extracts_dir = NULL,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+) {
   sample <- valid_sample_name(sample)
   extracts_dir <- resolve_extracts_dir(sample, extracts_dir)
 
   files <- unlist(lapply(years, function(year) {
     year_files <- resolve_year_files(sample, year, extracts_dir)
-
-    # check if files are monthly (not a single annual file)
-    annual_filename <- paste0("epi_cps", sample, "_", year, ".feather")
-    is_monthly <- !any(basename(year_files) == annual_filename)
-    if (is_monthly) {
-      monthly_prefix <- paste0("epi_cps", sample, "_", year, "_")
-      months <- sub(paste0(".*", monthly_prefix), "", basename(year_files))
-      months <- sub("\\.feather$", "", months)
-      months <- paste(months, collapse = " ")
-      message(paste("Data for year", year, "only includes months", months))
-    }
-
+    warn_partial_year(year_files, sample, year, .quiet)
     year_files
   }))
 
-  if (any(years == 2025)) {
-    message("Data for year 2025 excludes October")
-  }
+  warn_known_gaps(years, .quiet)
 
   structure(files, class = "cps_files", sample = sample)
 }
@@ -80,6 +74,8 @@ cps_files <- function(sample, years, extracts_dir = NULL) {
 #' @param ... tidy selection of variables to keep
 #' @param .extracts_dir directory where EPI extracts are
 #' @param .version_check when TRUE, confirm data are same version
+#' @param .quiet Logical. Suppress informational messages? Defaults to
+#'   `getOption("epiextractr.quiet", FALSE)`.
 #' @return A tibble of CPS microdata
 #' @export
 #' @importFrom magrittr %>%
@@ -88,28 +84,28 @@ cps_files <- function(sample, years, extracts_dir = NULL) {
 #' @importFrom rlang enquos
 #' @examples
 #' # Load all columns from the demonstration sample
-#' load_org_sample(2019:2020)
+#' load_org_sample(2023:2024)
 #'
 #' # Load a selection of columns
-#' load_org_sample(2019:2023, year, month, female, wage)
-#'
-#' # These are equivalent:
-#' load_org_sample(2019:2020)
-#' load_cps("org_sample", 2019:2020)
+#' load_org_sample(2023:2025, year, month, female, wage)
 #'
 #' # Use cps_files() for targets workflows:
-#' load_org_sample(cps_files("org_sample", 2019:2023), year, month, wage)
+#' org_files = cps_files("org_sample", 2023:2025)
+#' load_org_sample(org_files, year, month, wage)
 #'
 #' \dontrun{
 #' # Load real CPS ORG data (requires downloaded extracts):
 #' load_org(2010:2019, year, month, orgwgt, female, wage)
+#' # This is equivalent to
+#' load_cps("org", 2010:2019, year, month, orgwgt, female, wage)
 #' }
 load_cps <- function(
   .sample,
   .years,
   ...,
   .extracts_dir = NULL,
-  .version_check = TRUE
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
 ) {
   # retrieve valid sample name
   .sample <- valid_sample_name(.sample)
@@ -119,16 +115,19 @@ load_cps <- function(
 
     # catch stringified years like c("2023", "2025")
     if (!all(grepl("\\.feather$", .files))) {
-      rlang::abort(
-        "`.years` must be numeric years or file paths from `cps_files()`."
+      cli::cli_abort(
+        "{.arg .years} must be numeric years or file paths from {.fun cps_files}."
       )
     }
 
     # validate sample prefix
     if (!all(grepl(paste0("epi_cps", .sample), basename(.files)))) {
-      rlang::abort(
-        "`.years` contains files that do not match the expected sample type."
-      )
+      detected <- sub("^epi_cps", "", basename(.files[1]))
+      detected <- sub("_\\d.*", "", detected)
+      cli::cli_abort(c(
+        "{.arg .years} contains {.val {detected}} files, but expected {.val {(.sample)}}.",
+        "i" = "Use {.fun {paste0('load_', detected)}} or pass files from {.code cps_files(\"{(.sample)}\", ...)}."
+      ))
     }
 
     # read each file directly
@@ -148,20 +147,19 @@ load_cps <- function(
           year = x,
           ...,
           extracts_dir = .extracts_dir,
-          version_check = .version_check
+          version_check = .version_check,
+          .quiet = .quiet
         )
       }) %>%
       # stack the data and add version attributes
       bind_cps(version_check = .version_check)
 
-    if (any(.years == 2025)) {
-      message(paste("Data for year 2025 excludes October"))
-    }
+    warn_known_gaps(.years, .quiet)
   }
 
   # display version information
-  if (.version_check) {
-    message(paste("Using", attr(the_data, "label")))
+  if (!.quiet) {
+    cli::cli_alert_info("Using {attr(the_data, 'label')}")
   }
 
   # re-order & return columns
@@ -179,38 +177,54 @@ load_basic <- function(
   .years,
   ...,
   .extracts_dir = NULL,
-  .version_check = TRUE
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
 ) {
   load_cps(
     .sample = "basic",
     .years = .years,
     ...,
     .extracts_dir = .extracts_dir,
-    .version_check = .version_check
+    .version_check = .version_check,
+    .quiet = .quiet
   )
 }
 
 #' @export
 #' @describeIn load_cps Load CPS May files
-load_may <- function(.years, ..., .extracts_dir = NULL, .version_check = TRUE) {
+load_may <- function(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+) {
   load_cps(
     .sample = "may",
     .years = .years,
     ...,
     .extracts_dir = .extracts_dir,
-    .version_check = .version_check
+    .version_check = .version_check,
+    .quiet = .quiet
   )
 }
 
 #' @export
 #' @describeIn load_cps Load CPS ORG files
-load_org <- function(.years, ..., .extracts_dir = NULL, .version_check = TRUE) {
+load_org <- function(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+) {
   load_cps(
     .sample = "org",
     .years = .years,
     ...,
     .extracts_dir = .extracts_dir,
-    .version_check = .version_check
+    .version_check = .version_check,
+    .quiet = .quiet
   )
 }
 
@@ -220,14 +234,16 @@ load_org_sample <- function(
   .years,
   ...,
   .extracts_dir = NULL,
-  .version_check = TRUE
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
 ) {
   load_cps(
     .sample = "org_sample",
     .years = .years,
     ...,
     .extracts_dir = .extracts_dir,
-    .version_check = .version_check
+    .version_check = .version_check,
+    .quiet = .quiet
   )
 }
 
@@ -237,14 +253,16 @@ load_march <- function(
   .years,
   ...,
   .extracts_dir = NULL,
-  .version_check = TRUE
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
 ) {
   load_cps(
     .sample = "march",
     .years = .years,
     ...,
     .extracts_dir = .extracts_dir,
-    .version_check = .version_check
+    .version_check = .version_check,
+    .quiet = .quiet
   )
 }
 
@@ -254,21 +272,11 @@ read_single_year <- function(
   year,
   ...,
   extracts_dir,
-  version_check = TRUE
+  version_check = TRUE,
+  .quiet = FALSE
 ) {
   files <- resolve_year_files(sample, year, extracts_dir)
-
-  # check if files are monthly (not a single annual file)
-  annual_filename <- paste0("epi_cps", sample, "_", year, ".feather")
-  is_monthly <- !any(basename(files) == annual_filename)
-
-  if (is_monthly) {
-    monthly_prefix <- paste0("epi_cps", sample, "_", year, "_")
-    months <- sub(paste0(".*", monthly_prefix), "", basename(files))
-    months <- sub("\\.feather$", "", months)
-    months <- paste(months, collapse = " ")
-    message(paste("Data for year", year, "only includes months", months))
-  }
+  warn_partial_year(files, sample, year, .quiet)
 
   if (length(files) == 1) {
     return(arrow::read_feather(files, col_select = c(...)))
@@ -286,15 +294,16 @@ bind_cps <- function(x, version_check) {
   versions <- purrr::map(x, ~ attr(.x, "label")) %>% unlist()
   full_version <- unique(versions)
   if (!length(full_version) == 1) {
-    message(
-      "You are using multiple, different versions of the EPI CPS extracts."
-    )
-    message("This is not recommended.")
-    message(
-      "You should re-download the most current version of the data with download_cps()."
-    )
     if (version_check) {
-      rlang::abort("Version conflicts among multiple data files.")
+      cli::cli_abort(c(
+        "Version conflicts among multiple data files.",
+        "i" = "Re-download the most current version with {.fun download_cps}."
+      ))
+    } else {
+      cli::cli_warn(c(
+        "You are using multiple, different versions of the EPI CPS extracts.",
+        "i" = "Re-download the most current version with {.fun download_cps}."
+      ))
     }
   }
 
