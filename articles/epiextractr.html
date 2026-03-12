@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">epiextractr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.0</span>
       </span>
     </div>
 
@@ -91,8 +91,7 @@ directory called <code>C:/data/cps</code>, try</p>
 and columns:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/load_cps.html">load_org</a></span><span class="op">(</span><span class="fl">2019</span><span class="op">:</span><span class="fl">2021</span>, <span class="va">year</span>, <span class="va">female</span>, <span class="va">wage</span>, <span class="va">orgwgt</span>, .extracts_dir <span class="op">=</span> <span class="st">"C:/data/cps"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; # A tibble: 824,963 × 4</span></span>
+<pre><code><span><span class="co">#&gt; # A tibble: 824,963 × 4</span></span>
 <span><span class="co">#&gt;     year orgwgt female      wage</span></span>
 <span><span class="co">#&gt;    &lt;int&gt;  &lt;dbl&gt; &lt;int+lbl&gt;  &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1  2019 11367. 1 [Female] 14   </span></span>
@@ -129,12 +128,10 @@ from the 2010-2019 Basic CPS using tidyverse functions:</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/load_cps.html">load_cps</a></span><span class="op">(</span><span class="st">"basic"</span>, <span class="fl">2010</span><span class="op">:</span><span class="fl">2019</span>, <span class="va">year</span>, <span class="va">basicwgt</span>, <span class="va">wbhao</span>, <span class="va">emp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">basicwgt</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">wbhao</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html" class="external-link">weighted.mean</a></span><span class="op">(</span><span class="va">emp</span>, w <span class="op">=</span> <span class="va">basicwgt</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html" class="external-link">weighted.mean</a></span><span class="op">(</span><span class="va">emp</span>, w <span class="op">=</span> <span class="va">basicwgt</span><span class="op">)</span>, .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">wbhao</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu">haven</span><span class="fu">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html" class="external-link">as_factor</a></span><span class="op">(</span><span class="va">wbhao</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; # A tibble: 10 × 6</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; # A tibble: 10 × 6</span></span>
 <span><span class="co">#&gt; # Groups:   year [10]</span></span>
 <span><span class="co">#&gt;     year White Black Hispanic Asian Other</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
