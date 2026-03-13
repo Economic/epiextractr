@@ -36,3 +36,4 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
+Config/Needs/website: economic/epitemplate
