@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2020
+    COPYRIGHT HOLDER: Economic Policy Institute
