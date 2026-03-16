@@ -11,7 +11,8 @@ Authors@R:
              role = c("cph", "fnd")))
 Description: Tools to download and load the EPI microdata extracts from microdata.epi.org.
 License: MIT + file LICENSE
-URL: https://economic.github.io/epiextractr
+URL: https://economic.github.io/epiextractr/, https://github.com/Economic/epiextractr
+BugReports: https://github.com/economic/epiextractr/issues
 Encoding: UTF-8
 LazyData: true
 Imports:

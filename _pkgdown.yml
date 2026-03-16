@@ -3,14 +3,9 @@ url: https://economic.github.io/epiextractr
 template:
   package: epitemplate
 
-navbar:
-  right:
-   - icon: fa-github
-     href: https://github.com/economic/epiextractr
-
 home:
   links:
   - text: Underlying EPI microdata extracts
     href: https://microdata.epi.org
   - text: EPI State of Working America Data Library
-    href: https://epi.org/data
+    href: https://data.epi.org
