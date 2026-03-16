@@ -39,7 +39,10 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/economic/epiextractr"><span class="fa fa-github"></span></a></li>
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/economic/epiextractr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -55,7 +58,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>epiextractr</h1>
             
       
-
+      <small class="dont-index">Source: <a href="https://github.com/economic/epiextractr/blob/main/vignettes/epiextractr.Rmd" class="external-link"><code>vignettes/epiextractr.Rmd</code></a></small>
       <div class="d-none name"><code>epiextractr.Rmd</code></div>
     </div>
 
@@ -68,7 +71,7 @@ into a directory on your machine. The downloaded data will simply be
 <p>For example, to download the Outgoing Rotation Group extracts into a
 directory called <code>C:/data/cps</code>, try</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://economic.github.io/epiextractr">epiextractr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://economic.github.io/epiextractr/">epiextractr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/download_cps.html">download_cps</a></span><span class="op">(</span><span class="st">"org"</span>, <span class="st">"C:/data/cps"</span><span class="op">)</span></span></code></pre></div>
 <p>Then you can use <code><a href="../reference/load_cps.html">load_org()</a></code> to call a selection of years
 and columns:</p>
@@ -143,7 +146,7 @@ from the 2010-2019 Basic CPS using tidyverse functions:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> and <a href="https://economic.github.io/epitemplate/" class="external-link">epitemplate</a>.</p>
 </div>
 
   </div></footer>
