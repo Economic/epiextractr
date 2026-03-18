@@ -41,7 +41,7 @@ cps_files(
 
 ## Value
 
-A character vector of file paths with class `"cps_files"`
+A character vector of file paths
 
 ## Examples
 
@@ -51,10 +51,6 @@ cps_files("org_sample", 2023:2025)
 #> [1] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2023.feather"
 #> [2] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2024.feather"
 #> [3] "/home/runner/work/_temp/Library/epiextractr/extdata/epi_cpsorg_sample_2025.feather"
-#> attr(,"class")
-#> [1] "cps_files"
-#> attr(,"sample")
-#> [1] "org_sample"
 
 # Pass directly to load functions:
 load_org_sample(cps_files("org_sample", 2023:2025), year, month, wage)

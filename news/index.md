@@ -1,5 +1,11 @@
 # Changelog
 
+## epiextractr 0.11.1
+
+- normalize
+  [`cps_files()`](https://economic.github.io/epiextractr/reference/cps_files.md)
+  file name expansion and print output
+
 ## epiextractr 0.11.0
 
 - add `.quiet` argument to

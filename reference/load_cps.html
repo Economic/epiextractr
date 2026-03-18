@@ -11,7 +11,7 @@ https://microdata.epi.org."><meta property="og:image" content="https://economic.
 
     <a class="navbar-brand me-2" href="../index.html">epiextractr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +96,7 @@ must first be downloaded using <code><a href="download_cps.html">download_cps()<
 
 
 <dt id="arg--years">.years<a class="anchor" aria-label="anchor" href="#arg--years"></a></dt>
-<dd><p>years of CPS data (integers), or a <code>cps_files</code> object</p></dd>
+<dd><p>years of CPS data (integers), or file paths from <code><a href="cps_files.html">cps_files()</a></code></p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -123,8 +123,8 @@ must first be downloaded using <code><a href="download_cps.html">download_cps()<
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>All columns are selected if <code>...</code> is missing.</p>
-<p><code>.years</code> accepts either integer years or the result of <code><a href="cps_files.html">cps_files()</a></code>.
-When a <code>cps_files</code> object is passed, the files are read directly and
+<p><code>.years</code> accepts either integer years or file paths from <code><a href="cps_files.html">cps_files()</a></code>.
+When file paths are passed, the files are read directly and
 <code>.extracts_dir</code> is ignored.</p>
 <p><code>.extracts_dir</code> is required, but if NULL it will look for the environment variables</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>EPIEXTRACTS_CPSBASIC_DIR</span>

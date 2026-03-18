@@ -58,7 +58,8 @@ load_org_sample(
 
 - .years:
 
-  years of CPS data (integers), or a `cps_files` object
+  years of CPS data (integers), or file paths from
+  [`cps_files()`](https://economic.github.io/epiextractr/reference/cps_files.md)
 
 - ...:
 
@@ -85,9 +86,9 @@ A tibble of CPS microdata
 
 All columns are selected if `...` is missing.
 
-`.years` accepts either integer years or the result of
+`.years` accepts either integer years or file paths from
 [`cps_files()`](https://economic.github.io/epiextractr/reference/cps_files.md).
-When a `cps_files` object is passed, the files are read directly and
+When file paths are passed, the files are read directly and
 `.extracts_dir` is ignored.
 
 `.extracts_dir` is required, but if NULL it will look for the
