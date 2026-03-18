@@ -22,7 +22,7 @@ cps_files(
 \code{getOption("epiextractr.quiet", FALSE)}.}
 }
 \value{
-A character vector of file paths with class \code{"cps_files"}
+A character vector of file paths
 }
 \description{
 Returns file paths for the specified CPS sample and years. Useful for

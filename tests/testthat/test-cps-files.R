@@ -3,7 +3,7 @@ test_that("cps_files returns correct paths for org_sample", {
   expect_length(files, 3)
   expect_true(all(file.exists(files)))
   expect_true(all(grepl("epi_cpsorg_sample_", files)))
-  expect_s3_class(files, "cps_files")
+  expect_type(files, "character")
 })
 
 test_that("cps_files errors for years with no data", {
@@ -33,11 +33,3 @@ test_that("error when .years is stringified years", {
   expect_error(load_org(c("2023", "2025")), "numeric years or file paths")
 })
 
-test_that("plain character paths work after targets serialization", {
-  files <- cps_files("org_sample", 2023:2025)
-  plain <- unclass(files)
-  attr(plain, "sample") <- NULL
-  by_plain <- load_org_sample(plain)
-  by_years <- load_org_sample(2023:2025)
-  expect_identical(by_plain, by_years)
-})

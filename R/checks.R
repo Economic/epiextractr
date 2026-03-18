@@ -47,6 +47,7 @@ monthly_prefix <- function(sample, year) {
 
 # resolve file paths for a single year (annual file first, monthly fallback)
 resolve_year_files <- function(sample, year, extracts_dir) {
+  extracts_dir <- normalizePath(extracts_dir, mustWork = FALSE)
   full_feather_filename <- file.path(
     extracts_dir,
     annual_filename(sample, year)

@@ -52,7 +52,7 @@ load_org_sample(
 \arguments{
 \item{.sample}{CPS sample ("org", "basic", "march", "may")}
 
-\item{.years}{years of CPS data (integers), or a \code{cps_files} object}
+\item{.years}{years of CPS data (integers), or file paths from \code{cps_files()}}
 
 \item{...}{tidy selection of variables to keep}
 
@@ -74,8 +74,8 @@ must first be downloaded using \code{download_cps()} or from
 \details{
 All columns are selected if \code{...} is missing.
 
-\code{.years} accepts either integer years or the result of \code{cps_files()}.
-When a \code{cps_files} object is passed, the files are read directly and
+\code{.years} accepts either integer years or file paths from \code{cps_files()}.
+When file paths are passed, the files are read directly and
 \code{.extracts_dir} is ignored.
 
 \code{.extracts_dir} is required, but if NULL it will look for the environment variables

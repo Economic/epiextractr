@@ -1,3 +1,6 @@
+# epiextractr 0.11.1
+* normalize `cps_files()` file name expansion and print output
+
 # epiextractr 0.11.0
 * add `.quiet` argument to `load_cps()`, `load_org()`, `load_basic()`, `load_may()`, `load_org_sample()`, and `cps_files()` to suppress informational messages
 * support global option `options(epiextractr.quiet = TRUE)` to silence messages for an entire session

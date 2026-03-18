@@ -10,7 +10,7 @@
 #' @param extracts_dir directory where EPI extracts are
 #' @param .quiet Logical. Suppress informational messages? Defaults to
 #'   `getOption("epiextractr.quiet", FALSE)`.
-#' @return A character vector of file paths with class `"cps_files"`
+#' @return A character vector of file paths
 #' @export
 #' @examples
 #' cps_files("org_sample", 2023:2025)
@@ -43,7 +43,7 @@ cps_files <- function(
 
   warn_known_gaps(years, .quiet)
 
-  structure(files, class = "cps_files", sample = sample)
+  files
 }
 
 
@@ -55,8 +55,8 @@ cps_files <- function(
 #'
 #' All columns are selected if `...` is missing.
 #'
-#' `.years` accepts either integer years or the result of `cps_files()`.
-#' When a `cps_files` object is passed, the files are read directly and
+#' `.years` accepts either integer years or file paths from `cps_files()`.
+#' When file paths are passed, the files are read directly and
 #' `.extracts_dir` is ignored.
 #'
 #' `.extracts_dir` is required, but if NULL it will look for the environment variables
@@ -70,7 +70,7 @@ cps_files <- function(
 #' @describeIn load_cps base function group
 #'
 #' @param .sample CPS sample ("org", "basic", "march", "may")
-#' @param .years years of CPS data (integers), or a `cps_files` object
+#' @param .years years of CPS data (integers), or file paths from `cps_files()`
 #' @param ... tidy selection of variables to keep
 #' @param .extracts_dir directory where EPI extracts are
 #' @param .version_check when TRUE, confirm data are same version
