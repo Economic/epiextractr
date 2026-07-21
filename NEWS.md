@@ -1,3 +1,6 @@
+# epiextractr 0.12.0
+* use smaller compressed example data for `load_org_sample()`
+
 # epiextractr 0.11.1
 * normalize `cps_files()` file name expansion and print output
 

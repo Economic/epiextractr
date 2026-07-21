@@ -4,7 +4,9 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r}
+#| include: false
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -20,15 +22,24 @@ org_exists <- file.exists(Sys.getenv("EPIEXTRACTS_CPSORG_DIR"))
 <!-- badges: start -->
 <!-- badges: end -->
 
-epiextractr makes it easy to use the [EPI microdata extracts](https://microdata.epi.org/) in R.
+epiextractr makes it easy to use the [EPI microdata
+extracts](https://microdata.epi.org/) in R.
 
 ## Example
+
 Load a selection of variables from the 2019-2021 EPI CPS ORG extracts:
-```{r, eval = org_exists}
+
+```{r, eval=org_exists}
+#| label: intro_example
+
 library(epiextractr)
 load_org(2019:2021, year, female, wage, orgwgt)
+
 ```
-```{r, echo = FALSE, eval = !org_exists}
+```{r, eval=!org_exists}
+#| label: intro_example_output
+#| echo: false
+
 cat("
 # A tibble: 824,963 × 4
     year orgwgt female      wage
@@ -50,23 +61,54 @@ cat("
 ## Installation and basic usage
 
 First, install the current version of the package from R-Universe:
-```{r, eval = FALSE}
+
+```{r}
+#| label: installation_instructions
+#| eval: false
+
 install.packages(
   "epiextractr", 
   repos = c("https://economic.r-universe.dev", getOptions("repos"))
 )
 ```
 
+If you add the EPI r-universe repo to your `.Rprofile` with
+
+```{r}
+#| label: r-universe_instructions
+#| eval: false
+
+# Example .Rprofile
+options(repos = c(
+  epi = "https://economic.r-universe.dev",
+  getOption("repos")
+))
+```
+
+then you can simply
+
+```{r}
+#| eval: false
+
+install.packages("epiverse")
+```
+
 Then download the CPS microdata using `download_cps()`. For example,
-```{r, eval = FALSE}
+
+```{r}
+#| eval: false
+
 download_cps("org", "C:\data\cps")
 ```
-will download the latest EPI CPS ORG extracts in .feather format from https://microdata.epi.org and place them in the directory `C:\data\cps`.
+will download the latest EPI CPS ORG extracts in .feather format from
+https://microdata.epi.org and place them in the directory `C:\data\cps`.
 
 After the data is downloaded, load a selection of CPS data for your analysis:
-```{r, eval = FALSE}
+
+```{r}
+#| eval: false
+
 load_cps("org", 2000:2019, year, orgwgt, wage, wbho, .extracts_dir = "C:\data\cps")
 ```
 
 See `vignette("epiextractr")` for more examples.
-
