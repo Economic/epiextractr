@@ -106,25 +106,25 @@ test_that("cps_files 2025 exclusion message silenced by .quiet", {
 
 # Monthly/incomplete-year message respects .quiet
 
-test_that("monthly data message appears for 2026 by default", {
+test_that("monthly data message appears for 1979 by default", {
   expect_message(
-    load_org_sample(2026),
+    load_org_sample(1979),
     "only includes months 1"
   )
 })
 
 test_that("monthly data message silenced by .quiet for load", {
   expect_no_message(
-    load_org_sample(2026, .quiet = TRUE)
+    load_org_sample(1979, .quiet = TRUE)
   )
 })
 
 test_that("cps_files monthly message respects .quiet", {
   expect_message(
-    cps_files("org_sample", 2026),
+    cps_files("org_sample", 1979),
     "only includes months 1"
   )
   expect_no_message(
-    cps_files("org_sample", 2026, .quiet = TRUE)
+    cps_files("org_sample", 1979, .quiet = TRUE)
   )
 })
