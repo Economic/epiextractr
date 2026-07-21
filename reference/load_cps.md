@@ -118,60 +118,60 @@ which could be set in your .Renviron, for example.
 ``` r
 # Load all columns from the demonstration sample
 load_org_sample(2023:2024)
-#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.2.12
+#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.7.8
 #> # A tibble: 485,818 × 11
 #>     year month orgwgt statefips wbho      female   educ     wage wageotc emp    
 #>    <int> <int>  <dbl> <int+lbl> <int+lbl> <int+lb> <int+l> <dbl>   <dbl> <int+l>
-#>  1  2023     1  8983. 1 [AL]    2 [Black] 0 [Male] 2 [Hig…  NA      NA   0 [NIL…
-#>  2  2023     1 11509. 1 [AL]    2 [Black] 0 [Male] 2 [Hig…  NA      NA   0 [NIL…
-#>  3  2023     1  9589. 1 [AL]    1 [White] 0 [Male] 3 [Som…  NA      NA   0 [NIL…
-#>  4  2023     1  9691. 1 [AL]    1 [White] 0 [Male] 3 [Som…  27.5    27.5 1 [Emp…
-#>  5  2023     1  9856. 1 [AL]    1 [White] 0 [Male] 1 [Les…  11      11   1 [Emp…
-#>  6  2023     1  8670. 1 [AL]    1 [White] 0 [Male] 2 [Hig…  NA      NA   0 [NIL…
-#>  7  2023     1  9232. 1 [AL]    1 [White] 0 [Male] 5 [Adv…  NA      NA   0 [NIL…
-#>  8  2023     1 15947. 1 [AL]    2 [Black] 0 [Male] 2 [Hig…  41.1    41.1 1 [Emp…
-#>  9  2023     1  7429. 1 [AL]    1 [White] 1 [Fema… 2 [Hig…  NA      NA   0 [NIL…
-#> 10  2023     1  7523. 1 [AL]    1 [White] 1 [Fema… 3 [Som…  NA      NA   0 [NIL…
+#>  1  2023     1 11181. 1 [AL]    2 [Black] 1 [Fema… 2 [Hig… NA      NA    0 [NIL…
+#>  2  2023     1  6710. 1 [AL]    1 [White] 1 [Fema… 2 [Hig… NA      NA    1 [Emp…
+#>  3  2023     1  8748. 1 [AL]    1 [White] 0 [Male] 5 [Adv… 40.8    40.8  1 [Emp…
+#>  4  2023     1  7266. 1 [AL]    1 [White] 1 [Fema… 4 [Col… NA      NA    1 [Emp…
+#>  5  2023     1 13205. 1 [AL]    2 [Black] 0 [Male] 2 [Hig… NA      NA    0 [NIL…
+#>  6  2023     1 10211. 1 [AL]    1 [White] 1 [Fema… 3 [Som… 12      12    1 [Emp…
+#>  7  2023     1  7739. 1 [AL]    2 [Black] 1 [Fema… 2 [Hig… 10      10    1 [Emp…
+#>  8  2023     1 10079. 1 [AL]    4 [Other] 0 [Male] 2 [Hig… 18      18    1 [Emp…
+#>  9  2023     1  9672. 1 [AL]    1 [White] 1 [Fema… 2 [Hig… NA      NA    0 [NIL…
+#> 10  2023     1 14535. 1 [AL]    2 [Black] 0 [Male] 2 [Hig…  9.23    9.23 1 [Emp…
 #> # ℹ 485,808 more rows
 #> # ℹ 1 more variable: lfstat <int+lbl>
 
 # Load a selection of columns
 load_org_sample(2023:2025, year, month, female, wage)
 #> ! Data for year 2025 excludes October
-#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.2.12
+#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.7.8
 #> # A tibble: 700,029 × 4
 #>     year month female      wage
 #>    <int> <int> <int+lbl>  <dbl>
-#>  1  2023     1 0 [Male]    NA  
-#>  2  2023     1 0 [Male]    NA  
-#>  3  2023     1 0 [Male]    NA  
-#>  4  2023     1 0 [Male]    27.5
-#>  5  2023     1 0 [Male]    11  
-#>  6  2023     1 0 [Male]    NA  
-#>  7  2023     1 0 [Male]    NA  
-#>  8  2023     1 0 [Male]    41.1
-#>  9  2023     1 1 [Female]  NA  
-#> 10  2023     1 1 [Female]  NA  
+#>  1  2023     1 1 [Female] NA   
+#>  2  2023     1 1 [Female] NA   
+#>  3  2023     1 0 [Male]   40.8 
+#>  4  2023     1 1 [Female] NA   
+#>  5  2023     1 0 [Male]   NA   
+#>  6  2023     1 1 [Female] 12   
+#>  7  2023     1 1 [Female] 10   
+#>  8  2023     1 0 [Male]   18   
+#>  9  2023     1 1 [Female] NA   
+#> 10  2023     1 0 [Male]    9.23
 #> # ℹ 700,019 more rows
 
 # Use cps_files() for targets workflows:
 org_files = cps_files("org_sample", 2023:2025)
 #> ! Data for year 2025 excludes October
 load_org_sample(org_files, year, month, wage)
-#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.2.12
+#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.7.8
 #> # A tibble: 700,029 × 3
 #>     year month  wage
 #>    <int> <int> <dbl>
-#>  1  2023     1  NA  
-#>  2  2023     1  NA  
-#>  3  2023     1  NA  
-#>  4  2023     1  27.5
-#>  5  2023     1  11  
-#>  6  2023     1  NA  
-#>  7  2023     1  NA  
-#>  8  2023     1  41.1
-#>  9  2023     1  NA  
-#> 10  2023     1  NA  
+#>  1  2023     1 NA   
+#>  2  2023     1 NA   
+#>  3  2023     1 40.8 
+#>  4  2023     1 NA   
+#>  5  2023     1 NA   
+#>  6  2023     1 12   
+#>  7  2023     1 10   
+#>  8  2023     1 18   
+#>  9  2023     1 NA   
+#> 10  2023     1  9.23
 #> # ℹ 700,019 more rows
 
 if (FALSE) { # \dontrun{

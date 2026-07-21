@@ -55,20 +55,20 @@ cps_files("org_sample", 2023:2025)
 # Pass directly to load functions:
 load_org_sample(cps_files("org_sample", 2023:2025), year, month, wage)
 #> ! Data for year 2025 excludes October
-#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.2.12
+#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.7.8
 #> # A tibble: 700,029 × 3
 #>     year month  wage
 #>    <int> <int> <dbl>
-#>  1  2023     1  NA  
-#>  2  2023     1  NA  
-#>  3  2023     1  NA  
-#>  4  2023     1  27.5
-#>  5  2023     1  11  
-#>  6  2023     1  NA  
-#>  7  2023     1  NA  
-#>  8  2023     1  41.1
-#>  9  2023     1  NA  
-#> 10  2023     1  NA  
+#>  1  2023     1 NA   
+#>  2  2023     1 NA   
+#>  3  2023     1 40.8 
+#>  4  2023     1 NA   
+#>  5  2023     1 NA   
+#>  6  2023     1 12   
+#>  7  2023     1 10   
+#>  8  2023     1 18   
+#>  9  2023     1 NA   
+#> 10  2023     1  9.23
 #> # ℹ 700,019 more rows
 
 if (FALSE) { # \dontrun{

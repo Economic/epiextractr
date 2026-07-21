@@ -12,6 +12,7 @@ For example, to download the Outgoing Rotation Group extracts into a
 directory called `C:/data/cps`, try
 
 ``` r
+
 library(epiextractr)
 download_cps("org", "C:/data/cps")
 ```
@@ -21,6 +22,7 @@ Then you can use
 to call a selection of years and columns:
 
 ``` r
+
 load_org(2019:2021, year, female, wage, orgwgt, .extracts_dir = "C:/data/cps")
 ```
 
@@ -53,6 +55,7 @@ For example, if your .Renviron file sets
 then you can simply run
 
 ``` r
+
 load_org(2019:2021, year, female, wage, orgwgt)
 ```
 
@@ -64,6 +67,7 @@ Calculate annual employment-to-population ratios by race/ethnicity from
 the 2010-2019 Basic CPS using tidyverse functions:
 
 ``` r
+
 library(tidyverse)
 load_cps("basic", 2010:2019, year, basicwgt, wbhao, emp) %>%
   filter(basicwgt > 0) %>%

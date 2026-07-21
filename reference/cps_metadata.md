@@ -36,10 +36,10 @@ incorrect.
 ``` r
 cps_org <- load_org_sample(2023:2025)
 #> ! Data for year 2025 excludes October
-#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.2.12
+#> ℹ Using Demonstration sample EPI CPS ORG Extracts, Version 2026.7.8
 cps_citation(cps_org)
 #> ℹ You can cite `cps_org` as follows:
-#> [1] "Economic Policy Institute. 2026. Current Population Survey Extracts, Version 2026.2.12, https://microdata.epi.org."
+#> [1] "Economic Policy Institute. 2026. Current Population Survey Extracts, Version 2026.7.8, https://microdata.epi.org."
 cps_version(cps_org)
-#> [1] "2026.2.12"
+#> [1] "2026.7.8"
 ```

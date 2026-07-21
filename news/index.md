@@ -1,5 +1,10 @@
 # Changelog
 
+## epiextractr 0.12.0
+
+- use smaller compressed example data for
+  [`load_org_sample()`](https://economic.github.io/epiextractr/reference/load_cps.md)
+
 ## epiextractr 0.11.1
 
 - normalize
