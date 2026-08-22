@@ -41,7 +41,7 @@ First, install the current version of the package from R-Universe:
 ``` r
 install.packages(
   "epiextractr", 
-  repos = c("https://economic.r-universe.dev", getOptions("repos"))
+  repos = c("https://economic.r-universe.dev", getOption("repos"))
 )
 ```
 
