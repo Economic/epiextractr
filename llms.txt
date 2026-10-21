@@ -11,7 +11,7 @@ Load a selection of variables from the 2019-2021 EPI CPS ORG extracts:
 
 library(epiextractr)
 load_org(2019:2021, year, female, wage, orgwgt)
-#> ℹ Using EPI CPS ORG Extracts, Version 2026.7.8
+#> ℹ Using EPI CPS ORG Extracts, Version 2026.9.11
 #> # A tibble: 824,963 × 4
 #>     year female      wage orgwgt
 #>    <int> <int+lbl>  <dbl>  <dbl>
@@ -36,11 +36,11 @@ First, install the current version of the package from R-Universe:
 
 install.packages(
   "epiextractr", 
-  repos = c("https://economic.r-universe.dev", getOptions("repos"))
+  repos = c("https://economic.r-universe.dev", getOption("repos"))
 )
 ```
 
-If you add the EPI r-universe repo to your `.Rprofile` with
+If you first add the EPI r-universe repo to your `.Rprofile` with
 
 ``` r
 
@@ -55,7 +55,7 @@ then you can simply
 
 ``` r
 
-install.packages("epiverse")
+install.packages("epiextractr")
 ```
 
 Then download the CPS microdata using

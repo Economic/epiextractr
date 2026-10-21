@@ -68,7 +68,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://economic.github.io/epiextractr/">epiextractr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/load_cps.html">load_org</a></span><span class="op">(</span><span class="fl">2019</span><span class="op">:</span><span class="fl">2021</span>, <span class="va">year</span>, <span class="va">female</span>, <span class="va">wage</span>, <span class="va">orgwgt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ Using EPI CPS ORG Extracts, Version 2026.7.8</span></span>
+<span><span class="co">#&gt; ℹ Using EPI CPS ORG Extracts, Version 2026.9.11</span></span>
 <span><span class="co">#&gt; # A tibble: 824,963 × 4</span></span>
 <span><span class="co">#&gt;     year female      wage orgwgt</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;int+lbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
@@ -91,9 +91,9 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="st">"epiextractr"</span>, </span>
-<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://economic.r-universe.dev"</span>, <span class="fu">getOptions</span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://economic.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>If you add the EPI r-universe repo to your <code>.Rprofile</code> with</p>
+<p>If you first add the EPI r-universe repo to your <code>.Rprofile</code> with</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example .Rprofile</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -102,7 +102,7 @@
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>then you can simply</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"epiverse"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"epiextractr"</span><span class="op">)</span></span></code></pre></div>
 <p>Then download the CPS microdata using <code><a href="reference/download_cps.html">download_cps()</a></code>. For example,</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">download_cps</span>(<span class="st">"org"</span>, <span class="st">"C:\data\cps"</span>)</span></code></pre></div>
 <p>will download the latest EPI CPS ORG extracts in .feather format from <a href="https://microdata.epi.org" class="external-link uri">https://microdata.epi.org</a> and place them in the directory <code>C:\data\cps</code>.</p>
