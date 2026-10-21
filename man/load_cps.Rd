@@ -49,6 +49,14 @@ load_org_sample(
   .version_check = TRUE,
   .quiet = getOption("epiextractr.quiet", FALSE)
 )
+
+load_march(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 }
 \arguments{
 \item{.sample}{CPS sample ("org", "basic", "march", "may")}

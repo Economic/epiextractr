@@ -248,8 +248,8 @@ load_org_sample <- function(
   )
 }
 
-
-# load_cps Load CPS March files
+#' @export
+#' @describeIn load_cps Load CPS March (ASEC) files
 load_march <- function(
   .years,
   ...,
