@@ -68,11 +68,11 @@ First, install the current version of the package from R-Universe:
 
 install.packages(
   "epiextractr", 
-  repos = c("https://economic.r-universe.dev", getOptions("repos"))
+  repos = c("https://economic.r-universe.dev", getOption("repos"))
 )
 ```
 
-If you add the EPI r-universe repo to your `.Rprofile` with
+If you first add the EPI r-universe repo to your `.Rprofile` with
 
 ```{r}
 #| label: r-universe_instructions
@@ -90,7 +90,7 @@ then you can simply
 ```{r}
 #| eval: false
 
-install.packages("epiverse")
+install.packages("epiextractr")
 ```
 
 Then download the CPS microdata using `download_cps()`. For example,
