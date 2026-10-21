@@ -48,6 +48,14 @@ load_org_sample(
   .version_check = TRUE,
   .quiet = getOption("epiextractr.quiet", FALSE)
 )
+
+load_march(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 ```
 
 ## Arguments
@@ -97,6 +105,7 @@ environment variables
     EPIEXTRACTS_CPSBASIC_DIR
     EPIEXTRACTS_CPSORG_DIR
     EPIEXTRACTS_CPSMAY_DIR
+    EPIEXTRACTS_CPSMARCH_DIR
 
 which could be set in your .Renviron, for example.
 
@@ -112,6 +121,8 @@ which could be set in your .Renviron, for example.
 
 - `load_org_sample()`: Load a demonstration sample of CPS ORG files;
   only useful for examples
+
+- `load_march()`: Load CPS March (ASEC) files
 
 ## Examples
 

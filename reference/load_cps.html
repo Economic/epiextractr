@@ -11,7 +11,7 @@ https://microdata.epi.org."><meta property="og:image" content="https://economic.
 
     <a class="navbar-brand me-2" href="../index.html">epiextractr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,6 +84,14 @@ must first be downloaded using <code><a href="download_cps.html">download_cps()<
 <span>  .extracts_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .version_check <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  .quiet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"epiextractr.quiet"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">load_march</span><span class="op">(</span></span>
+<span>  <span class="va">.years</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .extracts_dir <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .version_check <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .quiet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"epiextractr.quiet"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -129,7 +137,8 @@ When file paths are passed, the files are read directly and
 <p><code>.extracts_dir</code> is required, but if NULL it will look for the environment variables</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>EPIEXTRACTS_CPSBASIC_DIR</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>EPIEXTRACTS_CPSORG_DIR</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>EPIEXTRACTS_CPSMAY_DIR</span></code></pre><p></p></div>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>EPIEXTRACTS_CPSMAY_DIR</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>EPIEXTRACTS_CPSMARCH_DIR</span></code></pre><p></p></div>
 <p>which could be set in your .Renviron, for example.</p>
     </div>
     <div class="section level2">
@@ -140,6 +149,7 @@ When file paths are passed, the files are read directly and
 <li><p><code>load_may()</code>: Load CPS May files</p></li>
 <li><p><code>load_org()</code>: Load CPS ORG files</p></li>
 <li><p><code>load_org_sample()</code>: Load a demonstration sample of CPS ORG files; only useful for examples</p></li>
+<li><p><code>load_march()</code>: Load CPS March (ASEC) files</p></li>
 </ul></div>
 
     <div class="section level2">

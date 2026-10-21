@@ -15,4 +15,5 @@
   [`load_may()`](https://economic.github.io/epiextractr/reference/load_cps.md)
   [`load_org()`](https://economic.github.io/epiextractr/reference/load_cps.md)
   [`load_org_sample()`](https://economic.github.io/epiextractr/reference/load_cps.md)
+  [`load_march()`](https://economic.github.io/epiextractr/reference/load_cps.md)
   : Load a selection of EPI CPS extracts
