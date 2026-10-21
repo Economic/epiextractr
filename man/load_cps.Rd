@@ -6,6 +6,7 @@
 \alias{load_may}
 \alias{load_org}
 \alias{load_org_sample}
+\alias{load_march}
 \title{Load a selection of EPI CPS extracts}
 \usage{
 load_cps(
@@ -48,6 +49,14 @@ load_org_sample(
   .version_check = TRUE,
   .quiet = getOption("epiextractr.quiet", FALSE)
 )
+
+load_march(
+  .years,
+  ...,
+  .extracts_dir = NULL,
+  .version_check = TRUE,
+  .quiet = getOption("epiextractr.quiet", FALSE)
+)
 }
 \arguments{
 \item{.sample}{CPS sample ("org", "basic", "march", "may")}
@@ -83,6 +92,7 @@ When file paths are passed, the files are read directly and
 \if{html}{\out{<div class="sourceCode">}}\preformatted{EPIEXTRACTS_CPSBASIC_DIR
 EPIEXTRACTS_CPSORG_DIR
 EPIEXTRACTS_CPSMAY_DIR
+EPIEXTRACTS_CPSMARCH_DIR
 }\if{html}{\out{</div>}}
 
 which could be set in your .Renviron, for example.
@@ -98,6 +108,8 @@ which could be set in your .Renviron, for example.
 \item \code{load_org()}: Load CPS ORG files
 
 \item \code{load_org_sample()}: Load a demonstration sample of CPS ORG files; only useful for examples
+
+\item \code{load_march()}: Load CPS March (ASEC) files
 
 }}
 \examples{

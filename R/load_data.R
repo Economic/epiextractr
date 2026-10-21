@@ -64,6 +64,7 @@ cps_files <- function(
 #' EPIEXTRACTS_CPSBASIC_DIR
 #' EPIEXTRACTS_CPSORG_DIR
 #' EPIEXTRACTS_CPSMAY_DIR
+#' EPIEXTRACTS_CPSMARCH_DIR
 #' ```
 #' which could be set in your .Renviron, for example.
 #'
@@ -247,8 +248,8 @@ load_org_sample <- function(
   )
 }
 
-
-# load_cps Load CPS March files
+#' @export
+#' @describeIn load_cps Load CPS March (ASEC) files
 load_march <- function(
   .years,
   ...,

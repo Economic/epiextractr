@@ -1,3 +1,6 @@
+# epiextractr 0.12.1
+* export `load_march()` for loading CPS March (ASEC) files
+
 # epiextractr 0.12.0
 * use smaller compressed example data for `load_org_sample()`
 
